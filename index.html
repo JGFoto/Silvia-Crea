@@ -49,7 +49,7 @@ body {
 
 .glass-card:hover {
   transform: translateY(-5px);
-  background: rgba(255,255,255,.78);
+  background: rgba(255,255,255,.85);
   box-shadow: 0 15px 35px -10px rgba(107,70,193,.2);
 }
 
@@ -87,95 +87,88 @@ body {
 
 
 /* =========================================================================
-   EFECTOS COZY DE FONDO (Lienzo, Luces, Polvo de hadas)
+   EFECTOS COZY DE FONDO OPTIMIZADOS
    ========================================================================= */
 
-/* 1. TEXTURA DE PAPEL */
+/* 1. TEXTURA DE PAPEL (Muy ligera) */
 .paper-texture {
   position: fixed; inset: 0; pointer-events: none; z-index: -2;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-  opacity: 0.05; mix-blend-mode: multiply;
+  opacity: 0.04; mix-blend-mode: multiply;
 }
 
-/* 2. VIÑETEADO SUAVE */
+/* 2. VIÑETEADO SUAVE ESTÁTICO (Muy ligero) */
 .vignette-overlay {
   position: fixed; inset: 0; pointer-events: none; z-index: 10;
-  background: radial-gradient(circle at center, transparent 40%, rgba(107, 70, 193, 0.12) 150%);
+  background: radial-gradient(circle at center, transparent 30%, rgba(107, 70, 193, 0.08) 120%);
 }
 
-/* 3. BOKEH (LUCES DESENFOCADAS) */
+/* 3. BOKEH ESTÁTICO (Sin animación pesada, solo color) */
 .bokeh-container {
   position: fixed; inset: 0; pointer-events: none; z-index: -1; overflow: hidden;
 }
 .bokeh-circle {
-  position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.35;
-  animation: bokeh-drift 25s infinite alternate ease-in-out;
+  position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.4;
 }
-.bokeh-1 { width: 40vw; height: 40vw; background: #FF77A9; top: -10%; left: -10%; animation-delay: 0s; }
-.bokeh-2 { width: 50vw; height: 50vw; background: #B794F4; bottom: -20%; right: -10%; animation-delay: -5s; animation-duration: 30s; }
-.bokeh-3 { width: 35vw; height: 35vw; background: #E9D8FD; top: 30%; left: 30%; animation-delay: -10s; animation-duration: 35s; }
+.bokeh-1 { width: 40vw; height: 40vw; background: #FF77A9; top: -5%; left: -5%; }
+.bokeh-2 { width: 50vw; height: 50vw; background: #B794F4; bottom: -10%; right: -5%; }
+.bokeh-3 { width: 35vw; height: 35vw; background: #E9D8FD; top: 40%; left: 35%; opacity: 0.5; }
 
-@keyframes bokeh-drift {
-  0% { transform: translate(0, 0) scale(1); }
-  100% { transform: translate(8vw, 8vh) scale(1.15); }
-}
-
-/* 4. POLVO DE HADAS (ESTRELLITAS) */
+/* =========================================================================
+   ESTRELLITAS MÁGICAS (Multidireccionales y aceleradas por hardware)
+   ========================================================================= */
 .fairy-dust-container {
   position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
 }
 .dust {
   position: absolute; background: white; border-radius: 50%;
-  box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.7), 0 0 12px 4px rgba(255, 119, 169, 0.3);
-  animation: float-up linear infinite; opacity: 0;
-}
-.dust-1 { left: 15%; width: 4px; height: 4px; animation-duration: 25s; animation-delay: 0s; }
-.dust-2 { left: 35%; width: 3px; height: 3px; animation-duration: 22s; animation-delay: 4s; }
-.dust-3 { left: 65%; width: 5px; height: 5px; animation-duration: 28s; animation-delay: 2s; }
-.dust-4 { left: 85%; width: 4px; height: 4px; animation-duration: 24s; animation-delay: 8s; }
-.dust-5 { left: 50%; width: 3px; height: 3px; animation-duration: 20s; animation-delay: 12s; }
-.dust-6 { left: 25%; width: 4px; height: 4px; animation-duration: 27s; animation-delay: 15s; }
-.dust-7 { left: 75%; width: 3px; height: 3px; animation-duration: 23s; animation-delay: 7s; }
-
-@keyframes float-up {
-  0% { transform: translate3d(0, 110vh, 0) scale(0.5); opacity: 0; }
-  20% { opacity: 0.7; transform: translate3d(20px, 80vh, 0) scale(1); }
-  80% { opacity: 0.7; transform: translate3d(-20px, 20vh, 0) scale(1); }
-  100% { transform: translate3d(0, -10vh, 0) scale(0.5); opacity: 0; }
+  box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.8), 0 0 12px 4px rgba(255, 119, 169, 0.4);
+  opacity: 0; will-change: transform, opacity; /* Optimización GPU vital */
 }
 
-
-/* =========================================================================
-   5. ICONOS ORIGINALES (CRAFTS) - Con movimiento ultra suave y orgánico
-   ========================================================================= */
-.craft-background { position: fixed; inset: 0; width: 100%; height: 100vh; overflow: hidden; pointer-events: none; z-index: 0; }
-.craft { position: absolute; width: 45px; height: 45px; opacity: .24; pointer-events: none; will-change: transform; animation: craft-drift ease-in-out infinite alternate; }
-.craft svg { width: 100%; height: 100%; overflow: visible; }
-
-/* Tiempos largos para que se muevan lento y cozy */
-.craft-1 { left: 5%; top: 12%; animation-duration: 35s; }
-.craft-2 { left: 78%; top: 18%; animation-duration: 42s; animation-delay: -5s; }
-.craft-3 { left: 18%; top: 35%; animation-duration: 30s; animation-delay: -2s; }
-.craft-4 { left: 88%; top: 42%; animation-duration: 38s; animation-delay: -8s; }
-.craft-5 { left: 70%; top: 65%; animation-duration: 32s; animation-delay: -12s; }
-.craft-6 { left: 7%; top: 76%; animation-duration: 45s; animation-delay: -15s; }
-.craft-7 { left: 43%; top: 20%; animation-duration: 36s; animation-delay: -3s; }
-.craft-8 { left: 28%; top: 87%; animation-duration: 40s; animation-delay: -7s; }
-.craft-9 { left: 57%; top: 48%; animation-duration: 32s; animation-delay: -11s; }
-.craft-10 { left: 93%; top: 82%; animation-duration: 46s; animation-delay: -14s; }
-.craft-11 { left: 35%; top: 9%; animation-duration: 38s; animation-delay: -6s; }
-.craft-12 { left: 62%; top: 90%; animation-duration: 34s; animation-delay: -9s; }
-.craft-13 { left: 22%; top: 60%; animation-duration: 42s; animation-delay: -4s; }
-.craft-14 { left: 82%; top: 56%; animation-duration: 30s; animation-delay: -10s; }
-
-@keyframes craft-drift {
-  0% { transform: translate3d(0,0,0) rotate(-4deg); }
-  33% { transform: translate3d(25px,-35px,0) rotate(4deg); }
-  66% { transform: translate3d(-15px,-60px,0) rotate(8deg); }
-  100% { transform: translate3d(-35px,-25px,0) rotate(-2deg); }
+/* Diferentes trayectorias cruzando la pantalla */
+@keyframes drift-up-right {
+  0% { transform: translate3d(0, 0, 0) scale(0.5); opacity: 0; }
+  20% { opacity: 0.8; transform: translate3d(15vw, -20vh, 0) scale(1.2); }
+  80% { opacity: 0.6; transform: translate3d(40vw, -60vh, 0) scale(1); }
+  100% { transform: translate3d(50vw, -80vh, 0) scale(0.5); opacity: 0; }
 }
-@media(prefers-reduced-motion:reduce) { .craft { animation: none; } }
-@media(max-width:560px) { .craft { width: 32px; height: 32px; opacity: .19; } }
+
+@keyframes drift-down-left {
+  0% { transform: translate3d(0, 0, 0) scale(0.5); opacity: 0; }
+  30% { opacity: 0.9; transform: translate3d(-20vw, 30vh, 0) scale(1.3); }
+  70% { opacity: 0.7; transform: translate3d(-40vw, 50vh, 0) scale(1); }
+  100% { transform: translate3d(-60vw, 70vh, 0) scale(0.5); opacity: 0; }
+}
+
+@keyframes drift-across {
+  0% { transform: translate3d(0, 0, 0) scale(0.5); opacity: 0; }
+  25% { opacity: 0.7; transform: translate3d(30vw, 10vh, 0) scale(1.1); }
+  75% { opacity: 0.7; transform: translate3d(60vw, -10vh, 0) scale(0.9); }
+  100% { transform: translate3d(90vw, 0, 0) scale(0.5); opacity: 0; }
+}
+
+@keyframes drift-spiral {
+  0% { transform: translate3d(0, 0, 0) scale(0.5); opacity: 0; }
+  25% { opacity: 0.8; transform: translate3d(-10vw, -25vh, 0) scale(1); }
+  50% { opacity: 0.6; transform: translate3d(10vw, -50vh, 0) scale(1.3); }
+  75% { opacity: 0.8; transform: translate3d(-5vw, -75vh, 0) scale(1); }
+  100% { transform: translate3d(15vw, -100vh, 0) scale(0.5); opacity: 0; }
+}
+
+/* Aplicación de las trayectorias a diferentes estrellitas repartidas */
+.d-1 { left: 10%; top: 90%; width: 4px; height: 4px; animation: drift-up-right 22s linear infinite; }
+.d-2 { left: 80%; top: 10%; width: 3px; height: 3px; animation: drift-down-left 28s linear infinite; animation-delay: 2s; }
+.d-3 { left: 5%; top: 40%; width: 5px; height: 5px; animation: drift-across 35s linear infinite; animation-delay: 5s; }
+.d-4 { left: 50%; top: 85%; width: 4px; height: 4px; animation: drift-spiral 25s linear infinite; animation-delay: 1s; }
+.d-5 { left: 90%; top: 80%; width: 3px; height: 3px; animation: drift-down-left 20s linear infinite; animation-delay: 10s; }
+.d-6 { left: 30%; top: 20%; width: 5px; height: 5px; animation: drift-across 30s linear infinite reverse; animation-delay: 7s; }
+.d-7 { left: 70%; top: 95%; width: 4px; height: 4px; animation: drift-up-right 26s linear infinite; animation-delay: 12s; }
+.d-8 { left: 40%; top: 15%; width: 3px; height: 3px; animation: drift-down-left 24s linear infinite; animation-delay: 15s; }
+.d-9 { left: 20%; top: 75%; width: 4px; height: 4px; animation: drift-spiral 29s linear infinite; animation-delay: 4s; }
+.d-10 { left: 85%; top: 50%; width: 5px; height: 5px; animation: drift-across 32s linear infinite reverse; animation-delay: 18s; }
+
+@media(prefers-reduced-motion:reduce) { .dust { animation: none !important; } }
 </style>
 </head>
 
@@ -184,7 +177,7 @@ body {
 <!-- 1. TEXTURA DE PAPEL -->
 <div class="paper-texture" aria-hidden="true"></div>
 
-<!-- 2. BOKEH (LUCES DESENFOCADAS) -->
+<!-- 2. BOKEH (LUCES DESENFOCADAS OPTIMIZADAS) -->
 <div class="bokeh-container" aria-hidden="true">
   <div class="bokeh-circle bokeh-1"></div>
   <div class="bokeh-circle bokeh-2"></div>
@@ -194,33 +187,18 @@ body {
 <!-- 3. VIÑETEADO SUAVE -->
 <div class="vignette-overlay" aria-hidden="true"></div>
 
-<!-- 4. POLVO DE HADAS (ESTRELLITAS) -->
+<!-- 4. POLVO DE HADAS MULTIDIRECCIONAL (ESTRELLITAS) -->
 <div class="fairy-dust-container" aria-hidden="true">
-  <div class="dust dust-1"></div>
-  <div class="dust dust-2"></div>
-  <div class="dust dust-3"></div>
-  <div class="dust dust-4"></div>
-  <div class="dust dust-5"></div>
-  <div class="dust dust-6"></div>
-  <div class="dust dust-7"></div>
-</div>
-
-<!-- 5. ICONOS ORIGINALES CON MOVIMIENTO LENTO -->
-<div class="craft-background" aria-hidden="true">
-  <div class="craft craft-1"><svg viewBox="0 0 64 64" fill="none"><path d="M32 7C17 7 6 18 6 31c0 13 10 23 23 23h6c5 0 8-5 5-9-2-3-1-7 3-7h4c7 0 11-5 10-12C55 15 44 7 32 7Z" fill="#DCC8F4" stroke="#9274B8" stroke-width="2.2"/><circle cx="20" cy="23" r="4" fill="#D98DB8"/><circle cx="31" cy="17" r="4" fill="#EBC68D"/><circle cx="42" cy="23" r="4" fill="#A9C9D6"/><circle cx="19" cy="36" r="4" fill="#B4C9A7"/></svg></div>
-  <div class="craft craft-2"><svg viewBox="0 0 80 80" fill="none"><path d="M18 39C13 25 25 13 39 15C53 11 66 24 65 38C69 51 56 65 42 64C27 68 15 54 18 39Z" fill="#E8C5DF" stroke="#B77EAA" stroke-width="2"/><path d="M23 23C39 27 47 43 49 59M37 16C24 29 28 47 43 64M55 20C42 32 39 46 55 55M18 39C31 32 49 30 64 40M23 53C35 42 48 39 62 46" stroke="#B77EAA" stroke-width="2.5" stroke-linecap="round"/><path d="M59 57Q73 61 69 72Q66 78 61 72" stroke="#B77EAA" stroke-width="2.5" stroke-linecap="round"/><path d="M10 12L38 43M8 10L14 10M36 41L40 40M19 7L47 34M17 5L21 6M45 32L49 31" stroke="#9274B8" stroke-width="2" stroke-linecap="round"/></svg></div>
-  <div class="craft craft-3"><svg viewBox="0 0 48 48" fill="none"><g transform="rotate(35 24 24)"><rect x="17" y="7" width="14" height="30" rx="3" fill="#E9B5D0" stroke="#B77EAA" stroke-width="1.8"/><path d="M17 13H31M17 31H31" stroke="#B77EAA" stroke-width="1.5"/><path d="M17 37L24 45L31 37Z" fill="#E8D1B9" stroke="#B77EAA" stroke-width="1.8"/></g></svg></div>
-  <div class="craft craft-4"><svg viewBox="0 0 64 64" fill="none"><path d="M31 29C19 7 5 11 7 26C8 34 20 39 31 38Z" fill="#EBC6E4" stroke="#BD8BB9" stroke-width="1.8"/><path d="M33 29C45 7 59 11 57 26C56 34 44 39 33 38Z" fill="#D6C5F2" stroke="#A78ACB" stroke-width="1.8"/><path d="M30 36C15 29 10 42 19 49C24 53 29 47 31 40Z" fill="#F2D6E5" stroke="#BD8BB9" stroke-width="1.8"/><path d="M34 36C49 29 54 42 45 49C40 53 35 47 33 40Z" fill="#E4D8F7" stroke="#A78ACB" stroke-width="1.8"/><path d="M32 26V43M31 27C27 20 24 19 22 19M33 27C37 20 40 19 42 19" stroke="#896B9F" stroke-width="2" stroke-linecap="round"/></svg></div>
-  <div class="craft craft-5"><svg viewBox="0 0 48 48" fill="none"><g transform="rotate(35 24 24)"><rect x="20" y="21" width="8" height="20" fill="#C6A7DD" stroke="#9274B8" stroke-width="1.8"/><path d="M20 25H28M20 36H28" stroke="#9274B8" stroke-width="1.5"/><path d="M20 21V9C20 4 28 4 28 9V21Z" fill="#E5BDD9" stroke="#9274B8" stroke-width="1.8"/></g></svg></div>
-  <div class="craft craft-6"><svg viewBox="0 0 64 64" fill="none"><circle cx="17" cy="44" r="8" stroke="#A78ACB" stroke-width="3" fill="#E9DDF8"/><circle cx="17" cy="20" r="8" stroke="#D49ABF" stroke-width="3" fill="#F9E4EF"/><path d="M22 25L48 49M22 39L48 15" stroke="#9274B8" stroke-width="3" stroke-linecap="round"/><circle cx="24" cy="32" r="3" fill="#9274B8"/></svg></div>
-  <div class="craft craft-7"><svg viewBox="0 0 64 64" fill="none" stroke="#C68CB5" stroke-width="1.6"><g fill="#F4DCEB"><ellipse cx="32" cy="17" rx="8" ry="12"/><ellipse cx="32" cy="47" rx="8" ry="12"/><ellipse cx="17" cy="32" rx="12" ry="8"/><ellipse cx="47" cy="32" rx="12" ry="8"/><ellipse cx="21.5" cy="21.5" rx="8" ry="11" transform="rotate(-45 21.5 21.5)"/><ellipse cx="42.5" cy="21.5" rx="8" ry="11" transform="rotate(45 42.5 21.5)"/><ellipse cx="21.5" cy="42.5" rx="8" ry="11" transform="rotate(45 21.5 42.5)"/><ellipse cx="42.5" cy="42.5" rx="8" ry="11" transform="rotate(-45 42.5 42.5)"/></g><circle cx="32" cy="32" r="8" fill="#E8C68E"/></svg></div>
-  <div class="craft craft-8"><svg viewBox="0 0 56 56" fill="none"><g transform="rotate(-30 28 28)"><rect x="10" y="18" width="10" height="29" rx="2" fill="#E8BCD8" stroke="#B77EAA" stroke-width="1.5"/><path d="M10 18L15 9L20 18Z" fill="#E8BCD8" stroke="#B77EAA" stroke-width="1.5"/><rect x="23" y="12" width="10" height="35" rx="2" fill="#CDBDEB" stroke="#9274B8" stroke-width="1.5"/><path d="M23 12L28 3L33 12Z" fill="#CDBDEB" stroke="#9274B8" stroke-width="1.5"/><rect x="36" y="21" width="10" height="26" rx="2" fill="#E8D1A9" stroke="#B99D76" stroke-width="1.5"/><path d="M36 21L41 12L46 21Z" fill="#E8D1A9" stroke="#B99D76" stroke-width="1.5"/></g></svg></div>
-  <div class="craft craft-9"><svg viewBox="0 0 40 40" fill="none"><path d="M20 3C22 13 27 18 37 20C27 22 22 27 20 37C18 27 13 22 3 20C13 18 18 13 20 3Z" fill="#D9BDEB" stroke="#A78ACB" stroke-width="1.3"/></svg></div>
-  <div class="craft craft-10"><svg viewBox="0 0 40 40" fill="none"><path d="M20 34S4 25 4 14C4 5 15 4 20 13C25 4 36 5 36 14C36 25 20 34 20 34Z" fill="#F3D3E4" stroke="#D59ABA" stroke-width="1.8"/></svg></div>
-  <div class="craft craft-11"><svg viewBox="0 0 56 56" fill="none"><path d="M19 10H37L42 17V40L37 47H19L14 40V17Z" fill="#E9D8F8" stroke="#A78ACB" stroke-width="2"/><path d="M15 19H41M15 25H41M15 31H41M15 37H41" stroke="#BD8BB9" stroke-width="3" stroke-linecap="round"/><path d="M28 10V47" stroke="#A78ACB" stroke-width="1.5"/><path d="M37 43Q49 48 47 54" stroke="#BD8BB9" stroke-width="2" stroke-linecap="round"/></svg></div>
-  <div class="craft craft-12"><svg viewBox="0 0 48 48" fill="none"><path d="M8 39C8 19 18 8 40 7C40 28 28 40 8 39Z" fill="#D9E8CF" stroke="#9BB68C" stroke-width="1.8"/><path d="M8 39L34 14M19 29L17 19M27 22L36 23" stroke="#9BB68C" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-  <div class="craft craft-13"><svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="17" fill="#E8D7F4" stroke="#A78ACB" stroke-width="2"/><circle cx="24" cy="24" r="10" fill="#F8E7F1" stroke="#BD8BB9" stroke-width="1.6"/><circle cx="20" cy="21" r="1.8" fill="#A78ACB"/><circle cx="28" cy="21" r="1.8" fill="#A78ACB"/><circle cx="20" cy="28" r="1.8" fill="#A78ACB"/><circle cx="28" cy="28" r="1.8" fill="#A78ACB"/></svg></div>
-  <div class="craft craft-14"><svg viewBox="0 0 48 48" fill="none"><path d="M23 22C15 6 3 10 7 22C9 29 17 30 23 28Z" fill="#EBC6E4" stroke="#BD8BB9" stroke-width="1.6"/><path d="M25 22C33 6 45 10 41 22C39 29 31 30 25 28Z" fill="#D6C5F2" stroke="#A78ACB" stroke-width="1.6"/><path d="M23 27C12 24 11 37 20 37L24 30ZM25 27C36 24 37 37 28 37L24 30Z" fill="#F2D6E5" stroke="#BD8BB9" stroke-width="1.5"/><path d="M24 20V33M23 20L19 14M25 20L29 14" stroke="#896B9F" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+  <div class="dust d-1"></div>
+  <div class="dust d-2"></div>
+  <div class="dust d-3"></div>
+  <div class="dust d-4"></div>
+  <div class="dust d-5"></div>
+  <div class="dust d-6"></div>
+  <div class="dust d-7"></div>
+  <div class="dust d-8"></div>
+  <div class="dust d-9"></div>
+  <div class="dust d-10"></div>
 </div>
 
 <!-- NAVEGACIÓN -->
@@ -977,7 +955,7 @@ function renderGallery() {
     const card = document.createElement('div');
     const themeIndex = index % 2; 
     let cardClasses = `rounded-2xl overflow-hidden group relative flex flex-col product-card card-theme-${themeIndex}`;
-    if (n >= 5) cardClasses += ' min-w-[200px] w-[200px] sm:min-min-[260px] sm:w-[260px] snap-center shrink-0';
+    if (n >= 5) cardClasses += ' min-w-[200px] w-[200px] sm:min-w-[260px] sm:w-[260px] snap-center shrink-0';
     else if (n === 4) cardClasses += ' w-full'; 
     else cardClasses += ' w-full max-w-[260px]'; 
     card.className = cardClasses;
