@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Silvia Rodríguez | Arte y Manualidades</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://cdn.tailwindcss.com"></script>
+
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      fontFamily: {
+        serif: ['"Playfair Display"', 'serif'],
+        sans: ['"Poppins"', 'sans-serif'],
+        montserrat: ['"Montserrat"', 'sans-serif']
+      },
+      colors: {
+        'lila-suave': '#E9D8FD',
+        'lila-medio': '#B794F4',
+        'lila-oscuro': '#6B46C1',
+        'rosa-suave': '#FED7E2',
+        'rosa-fuerte': '#FF77A9'
+      }
+    }
+  }
+};
+</script>
+
+<style>
+body {
+  background: linear-gradient(135deg,#FDF4FF 0%,#F3E8FF 50%,#FCE7F3 100%);
+  background-attachment: fixed;
+}
+
+.glass-card {
+  background: rgba(255,255,255,.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,.7);
+  box-shadow: 0 10px 30px -10px rgba(107,70,193,.1);
+  transition: all .3s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255,255,255,.78);
+  box-shadow: 0 15px 35px -10px rgba(107,70,193,.2);
+}
+
+/* Tarjetas Alternas (Lila / Rosa) */
+.card-theme-0 { background-color: #E9D8FD !important; border-color: #B794F4; border-width: 1px;} 
+.card-theme-0 .card-btn { background-color: white; border-color: #6B46C1; color: #6B46C1; }
+.card-theme-0 .card-btn:hover { background-color: #6B46C1; color: white; }
+
+.card-theme-1 { background-color: #FED7E2 !important; border-color: #FF77A9; border-width: 1px;} 
+.card-theme-1 .card-btn { background-color: white; border-color: #FF77A9; color: #FF77A9; }
+.card-theme-1 .card-btn:hover { background-color: #FF77A9; color: white; }
+
+/* Animación de latido para los Destacados */
+@keyframes pulse-destacado {
+  0% { box-shadow: 0 0 0 0 rgba(107, 70, 193, 0.6); border-color: #6B46C1; }
+  70% { box-shadow: 0 0 0 10px rgba(107, 70, 193, 0); border-color: #B794F4; }
+  100% { box-shadow: 0 0 0 0 rgba(107, 70, 193, 0); border-color: #6B46C1; }
+}
+.destacado-animado {
+  animation: pulse-destacado 2s infinite;
+  border-width: 2px !important;
+  border-style: solid;
+}
+
+/* Scrollbars */
+.styled-scroll::-webkit-scrollbar { height: 8px; }
+.styled-scroll::-webkit-scrollbar-track { background: rgba(233, 216, 253, 0.5); border-radius: 10px; }
+.styled-scroll::-webkit-scrollbar-thumb { background: rgba(183, 148, 244, 0.8); border-radius: 10px; }
+.styled-scroll::-webkit-scrollbar-thumb:hover { background: rgba(107, 70, 193, 0.8); }
+.styled-scroll { scrollbar-width: thin; scrollbar-color: rgba(183, 148, 244, 0.8) rgba(233, 216, 253, 0.5); }
+
+.modal-scroll::-webkit-scrollbar { width: 6px; }
+.modal-scroll::-webkit-scrollbar-track { background: transparent; }
+.modal-scroll::-webkit-scrollbar-thumb { background: #B794F4; border-radius: 10px; }
+
+/* Fondo Animado */
+.craft-background { position: fixed; inset: 0; width: 100%; height: 100vh; overflow: hidden; pointer-events: none; z-index: 0; }
+.craft { position: absolute; width: 45px; height: 45px; opacity: .24; pointer-events: none; will-change: transform; animation: craft-drift 14s ease-in-out infinite; }
+.craft svg { width: 100%; height: 100%; overflow: visible; }
+
+.craft-1 { left: 5%; top: 12%; animation-duration: 17s; }
+.craft-2 { left: 78%; top: 18%; animation-duration: 21s; }
+.craft-3 { left: 18%; top: 35%; animation-duration: 15s; }
+.craft-4 { left: 88%; top: 42%; animation-duration: 19s; }
+.craft-5 { left: 70%; top: 65%; animation-duration: 16s; }
+.craft-6 { left: 7%; top: 76%; animation-duration: 22s; }
+.craft-7 { left: 43%; top: 20%; animation-duration: 18s; }
+.craft-8 { left: 28%; top: 87%; animation-duration: 20s; }
+.craft-9 { left: 57%; top: 48%; animation-duration: 16s; }
+.craft-10 { left: 93%; top: 82%; animation-duration: 23s; }
+.craft-11 { left: 35%; top: 9%; animation-duration: 19s; }
+.craft-12 { left: 62%; top: 90%; animation-duration: 17s; }
+.craft-13 { left: 22%; top: 60%; animation-duration: 21s; }
+.craft-14 { left: 82%; top: 56%; animation-duration: 15s; }
+
+@keyframes craft-drift {
+  0% { transform: translate3d(0,0,0) rotate(-8deg); }
+  25% { transform: translate3d(18px,-25px,0) rotate(8deg); }
+  50% { transform: translate3d(-12px,-48px,0) rotate(15deg); }
+  75% { transform: translate3d(-25px,-20px,0) rotate(-5deg); }
+  100% { transform: translate3d(0,0,0) rotate(-8deg); }
+}
+@media(prefers-reduced-motion:reduce) { .craft { animation: none; } }
+@media(max-width:560px) { .craft { width: 32px; height: 32px; opacity: .19; } }
+</style>
+</head>
+
+<body class="font-sans text-gray-700 antialiased relative min-h-screen overflow-x-hidden">
+
+<div class="craft-background" aria-hidden="true">
+  <div class="craft craft-1"><svg viewBox="0 0 64 64" fill="none"><path d="M32 7C17 7 6 18 6 31c0 13 10 23 23 23h6c5 0 8-5 5-9-2-3-1-7 3-7h4c7 0 11-5 10-12C55 15 44 7 32 7Z" fill="#DCC8F4" stroke="#9274B8" stroke-width="2.2"/><circle cx="20" cy="23" r="4" fill="#D98DB8"/><circle cx="31" cy="17" r="4" fill="#EBC68D"/><circle cx="42" cy="23" r="4" fill="#A9C9D6"/><circle cx="19" cy="36" r="4" fill="#B4C9A7"/></svg></div>
+  <div class="craft craft-2"><svg viewBox="0 0 80 80" fill="none"><path d="M18 39C13 25 25 13 39 15C53 11 66 24 65 38C69 51 56 65 42 64C27 68 15 54 18 39Z" fill="#E8C5DF" stroke="#B77EAA" stroke-width="2"/><path d="M23 23C39 27 47 43 49 59M37 16C24 29 28 47 43 64M55 20C42 32 39 46 55 55M18 39C31 32 49 30 64 40M23 53C35 42 48 39 62 46" stroke="#B77EAA" stroke-width="2.5" stroke-linecap="round"/><path d="M59 57Q73 61 69 72Q66 78 61 72" stroke="#B77EAA" stroke-width="2.5" stroke-linecap="round"/><path d="M10 12L38 43M8 10L14 10M36 41L40 40M19 7L47 34M17 5L21 6M45 32L49 31" stroke="#9274B8" stroke-width="2" stroke-linecap="round"/></svg></div>
+  <div class="craft craft-3"><svg viewBox="0 0 48 48" fill="none"><g transform="rotate(35 24 24)"><rect x="17" y="7" width="14" height="30" rx="3" fill="#E9B5D0" stroke="#B77EAA" stroke-width="1.8"/><path d="M17 13H31M17 31H31" stroke="#B77EAA" stroke-width="1.5"/><path d="M17 37L24 45L31 37Z" fill="#E8D1B9" stroke="#B77EAA" stroke-width="1.8"/></g></svg></div>
+  <div class="craft craft-4"><svg viewBox="0 0 64 64" fill="none"><path d="M31 29C19 7 5 11 7 26C8 34 20 39 31 38Z" fill="#EBC6E4" stroke="#BD8BB9" stroke-width="1.8"/><path d="M33 29C45 7 59 11 57 26C56 34 44 39 33 38Z" fill="#D6C5F2" stroke="#A78ACB" stroke-width="1.8"/><path d="M30 36C15 29 10 42 19 49C24 53 29 47 31 40Z" fill="#F2D6E5" stroke="#BD8BB9" stroke-width="1.8"/><path d="M34 36C49 29 54 42 45 49C40 53 35 47 33 40Z" fill="#E4D8F7" stroke="#A78ACB" stroke-width="1.8"/><path d="M32 26V43M31 27C27 20 24 19 22 19M33 27C37 20 40 19 42 19" stroke="#896B9F" stroke-width="2" stroke-linecap="round"/></svg></div>
+  <div class="craft craft-5"><svg viewBox="0 0 48 48" fill="none"><g transform="rotate(35 24 24)"><rect x="20" y="21" width="8" height="20" fill="#C6A7DD" stroke="#9274B8" stroke-width="1.8"/><path d="M20 25H28M20 36H28" stroke="#9274B8" stroke-width="1.5"/><path d="M20 21V9C20 4 28 4 28 9V21Z" fill="#E5BDD9" stroke="#9274B8" stroke-width="1.8"/></g></svg></div>
+  <div class="craft craft-6"><svg viewBox="0 0 64 64" fill="none"><circle cx="17" cy="44" r="8" stroke="#A78ACB" stroke-width="3" fill="#E9DDF8"/><circle cx="17" cy="20" r="8" stroke="#D49ABF" stroke-width="3" fill="#F9E4EF"/><path d="M22 25L48 49M22 39L48 15" stroke="#9274B8" stroke-width="3" stroke-linecap="round"/><circle cx="24" cy="32" r="3" fill="#9274B8"/></svg></div>
+  <div class="craft craft-7"><svg viewBox="0 0 64 64" fill="none" stroke="#C68CB5" stroke-width="1.6"><g fill="#F4DCEB"><ellipse cx="32" cy="17" rx="8" ry="12"/><ellipse cx="32" cy="47" rx="8" ry="12"/><ellipse cx="17" cy="32" rx="12" ry="8"/><ellipse cx="47" cy="32" rx="12" ry="8"/><ellipse cx="21.5" cy="21.5" rx="8" ry="11" transform="rotate(-45 21.5 21.5)"/><ellipse cx="42.5" cy="21.5" rx="8" ry="11" transform="rotate(45 42.5 21.5)"/><ellipse cx="21.5" cy="42.5" rx="8" ry="11" transform="rotate(45 21.5 42.5)"/><ellipse cx="42.5" cy="42.5" rx="8" ry="11" transform="rotate(-45 42.5 42.5)"/></g><circle cx="32" cy="32" r="8" fill="#E8C68E"/></svg></div>
+  <div class="craft craft-8"><svg viewBox="0 0 56 56" fill="none"><g transform="rotate(-30 28 28)"><rect x="10" y="18" width="10" height="29" rx="2" fill="#E8BCD8" stroke="#B77EAA" stroke-width="1.5"/><path d="M10 18L15 9L20 18Z" fill="#E8BCD8" stroke="#B77EAA" stroke-width="1.5"/><rect x="23" y="12" width="10" height="35" rx="2" fill="#CDBDEB" stroke="#9274B8" stroke-width="1.5"/><path d="M23 12L28 3L33 12Z" fill="#CDBDEB" stroke="#9274B8" stroke-width="1.5"/><rect x="36" y="21" width="10" height="26" rx="2" fill="#E8D1A9" stroke="#B99D76" stroke-width="1.5"/><path d="M36 21L41 12L46 21Z" fill="#E8D1A9" stroke="#B99D76" stroke-width="1.5"/></g></svg></div>
+  <div class="craft craft-9"><svg viewBox="0 0 40 40" fill="none"><path d="M20 3C22 13 27 18 37 20C27 22 22 27 20 37C18 27 13 22 3 20C13 18 18 13 20 3Z" fill="#D9BDEB" stroke="#A78ACB" stroke-width="1.3"/></svg></div>
+  <div class="craft craft-10"><svg viewBox="0 0 40 40" fill="none"><path d="M20 34S4 25 4 14C4 5 15 4 20 13C25 4 36 5 36 14C36 25 20 34 20 34Z" fill="#F3D3E4" stroke="#D59ABA" stroke-width="1.8"/></svg></div>
+  <div class="craft craft-11"><svg viewBox="0 0 56 56" fill="none"><path d="M19 10H37L42 17V40L37 47H19L14 40V17Z" fill="#E9D8F8" stroke="#A78ACB" stroke-width="2"/><path d="M15 19H41M15 25H41M15 31H41M15 37H41" stroke="#BD8BB9" stroke-width="3" stroke-linecap="round"/><path d="M28 10V47" stroke="#A78ACB" stroke-width="1.5"/><path d="M37 43Q49 48 47 54" stroke="#BD8BB9" stroke-width="2" stroke-linecap="round"/></svg></div>
+  <div class="craft craft-12"><svg viewBox="0 0 48 48" fill="none"><path d="M8 39C8 19 18 8 40 7C40 28 28 40 8 39Z" fill="#D9E8CF" stroke="#9BB68C" stroke-width="1.8"/><path d="M8 39L34 14M19 29L17 19M27 22L36 23" stroke="#9BB68C" stroke-width="1.8" stroke-linecap="round"/></svg></div>
+  <div class="craft craft-13"><svg viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="17" fill="#E8D7F4" stroke="#A78ACB" stroke-width="2"/><circle cx="24" cy="24" r="10" fill="#F8E7F1" stroke="#BD8BB9" stroke-width="1.6"/><circle cx="20" cy="21" r="1.8" fill="#A78ACB"/><circle cx="28" cy="21" r="1.8" fill="#A78ACB"/><circle cx="20" cy="28" r="1.8" fill="#A78ACB"/><circle cx="28" cy="28" r="1.8" fill="#A78ACB"/></svg></div>
+  <div class="craft craft-14"><svg viewBox="0 0 48 48" fill="none"><path d="M23 22C15 6 3 10 7 22C9 29 17 30 23 28Z" fill="#EBC6E4" stroke="#BD8BB9" stroke-width="1.6"/><path d="M25 22C33 6 45 10 41 22C39 29 31 30 25 28Z" fill="#D6C5F2" stroke="#A78ACB" stroke-width="1.6"/><path d="M23 27C12 24 11 37 20 37L24 30ZM25 27C36 24 37 37 28 37L24 30Z" fill="#F2D6E5" stroke="#BD8BB9" stroke-width="1.5"/><path d="M24 20V33M23 20L19 14M25 20L29 14" stroke="#896B9F" stroke-width="1.6" stroke-linecap="round"/></svg></div>
+</div>
+
+<!-- NAVEGACIÓN -->
+<nav class="fixed w-full z-50 glass-card rounded-none border-t-0 border-l-0 border-r-0 px-6 py-4">
+  <div class="max-w-7xl mx-auto flex justify-between items-center">
+    <a href="#inicio" class="font-serif font-bold text-2xl text-lila-oscuro tracking-wider">SR.</a>
+    <div class="flex items-center gap-4 md:gap-6 text-sm font-medium text-lila-oscuro">
+      <a href="#especialidades" class="hover:text-rosa-fuerte transition-colors hidden md:block">Mis Especialidades</a>
+      <a href="#catalogo" class="hover:text-rosa-fuerte transition-colors hidden md:block">Catálogo</a>
+      <a href="#galeria" class="hover:text-rosa-fuerte transition-colors hidden md:block">Galería</a>
+      <a href="#contacto" class="hover:text-rosa-fuerte transition-colors hidden md:block">Contacto</a>
+      <a href="#carrito" class="relative flex items-center hover:text-rosa-fuerte transition-colors" aria-label="Ir al carrito">
+        <i class="fa-solid fa-shopping-cart text-xl"></i>
+        <span id="cart-count" class="absolute -top-2 -right-2 bg-rosa-fuerte text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
+      </a>
+      <a href="https://instagram.com/silviiacrea" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 bg-white/60 px-4 py-2 rounded-full hover:bg-lila-oscuro hover:text-white transition-colors shadow-sm">
+        <i class="fa-brands fa-instagram text-lg"></i>
+        <span class="tracking-wide hidden sm:inline">@silviiacrea</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- PRESENTACIÓN -->
+<header id="inicio" class="relative pt-32 pb-16 md:pt-40 md:pb-24 flex items-center justify-center text-center px-4 z-10">
+  <div class="max-w-3xl mx-auto relative">
+    <div class="font-serif text-8xl md:text-9xl text-lila-medio/20 absolute top-[38%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 -z-10 pointer-events-none select-none">SR</div>
+    <p class="text-lila-oscuro uppercase tracking-[0.3em] text-xs md:text-sm font-semibold mb-6 flex items-center justify-center gap-3">
+      Arte y Manualidades
+    </p>
+    <h1 class="font-serif text-5xl md:text-7xl font-bold mb-4 leading-tight">
+      <span class="text-[#FF77A9]">Silvia</span>
+      <span class="text-lila-oscuro">Rodríguez</span>
+    </h1>
+    <p class="font-montserrat text-gray-600 mb-10 max-w-lg mx-auto text-lg font-light leading-relaxed">
+      Cada creación nace de la pasión por lo hecho a mano, dedicando cariño y atención a cada puntada, trazo y abalorio. Desde amigurumis y tejidos hasta pulseras de abalorios, scrapbooking y mucho más, cada pieza es única, hecha con mimo, creatividad e ilusión.
+    </p>
+    <div class="flex flex-wrap items-center justify-center gap-4">
+      <a href="#catalogo" class="inline-flex items-center gap-2 bg-gradient-to-r from-lila-oscuro to-lila-medio text-white px-8 py-3.5 rounded-full font-medium shadow-lg shadow-lila-medio/40 hover:shadow-xl hover:scale-105 transition-all">
+        Ver mi catálogo <i class="fa-solid fa-arrow-down text-sm"></i>
+      </a>
+      <a href="#contacto" class="inline-flex items-center gap-2 bg-white/80 text-lila-oscuro border border-lila-suave px-7 py-3.5 rounded-full font-medium shadow-sm hover:bg-lila-oscuro hover:text-white transition-all">
+        <i class="fa-regular fa-envelope"></i> Contactar
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- ESPECIALIDADES DINÁMICAS (Slider) -->
+<section id="especialidades" class="py-16 relative z-10">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-12">
+      <h3 class="font-serif text-3xl md:text-4xl text-lila-oscuro font-bold mb-3">Mis Especialidades</h3>
+      <div class="w-16 h-1 bg-lila-suave mx-auto mt-4 rounded-full"></div>
+    </div>
+  </div>
+  <div id="specialties-wrapper" class="w-full max-w-7xl mx-auto">
+    <div id="specialties-grid" class="flex flex-wrap justify-center gap-6 px-6 pb-8">
+      <!-- Se llena automáticamente con Google Sheets -->
+    </div>
+  </div>
+</section>
+
+<!-- CATÁLOGO DINÁMICO -->
+<section id="catalogo" class="py-16 relative z-10">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-12">
+      <h3 class="font-serif text-3xl md:text-4xl text-lila-oscuro font-bold mb-3">Mi Catálogo</h3>
+      <p id="catalogo-desc" class="text-gray-600">Explora mis creaciones y encarga tu favorita. Haz clic en las imágenes para ver más detalles.</p>
+    </div>
+  </div>
+  <div id="product-wrapper" class="w-full max-w-7xl mx-auto">
+    <div id="product-grid" class="flex overflow-x-auto gap-6 pb-8 snap-x snap-mandatory styled-scroll pr-6 pl-6">
+      <!-- Se llena automáticamente con Google Sheets -->
+    </div>
+  </div>
+</section>
+
+<!-- SECCIÓN GALERÍA DINÁMICA -->
+<section id="galeria" class="py-16 relative z-10">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-12">
+      <h3 class="font-serif text-3xl md:text-4xl text-lila-oscuro font-bold mb-3">Galería de Trabajos</h3>
+      <p id="galeria-desc" class="text-gray-600">Una muestra de encargos especiales y piezas hechas a mano con mucho cariño.</p>
+      <div class="w-16 h-1 bg-lila-suave mx-auto mt-4 rounded-full"></div>
+    </div>
+  </div>
+  <div id="gallery-wrapper" class="w-full max-w-7xl mx-auto">
+    <div id="gallery-grid" class="flex overflow-x-auto gap-6 pb-8 snap-x snap-mandatory styled-scroll pr-6 pl-6">
+      <!-- Se llena automáticamente con Google Sheets -->
+    </div>
+  </div>
+</section>
+
+<!-- CARRITO Y FINALIZAR COMPRA -->
+<section id="carrito" class="py-16 px-6 relative z-10 min-h-[45vh]">
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center mb-10">
+      <h3 class="font-serif text-3xl md:text-4xl text-lila-oscuro font-bold mb-3">Mi carrito de la compra</h3>
+      <p class="text-gray-600">Revisa aquí las creaciones que has añadido y personaliza los detalles.</p>
+      <div class="w-16 h-1 bg-lila-suave mx-auto mt-4 rounded-full"></div>
+    </div>
+
+    <div class="glass-card rounded-2xl p-6 md:p-8">
+      <div id="cart-items" class="text-gray-600 text-center py-4">
+        Todavía no has añadido ningún producto.
+      </div>
+
+      <div id="bulk-order-alert" class="hidden mt-5 bg-pink-50 border-2 border-rosa-fuerte rounded-2xl p-5 text-center shadow-sm">
+        <p class="text-lila-oscuro font-semibold text-base mb-1">
+          <i class="fa-solid fa-envelope-open-text text-rosa-fuerte mr-1"></i> ¡Has seleccionado más de 20 unidades!
+        </p>
+        <p class="text-sm text-gray-600 mb-4">
+          Para pedidos grandes (más de 20 unidades para eventos, regalos, comuniones o encargos especiales), por favor envíame un correo electrónico directamente para concretar plazos de elaboración y precios especiales:
+        </p>
+        <a href="mailto:silviiacrea@gmail.com?subject=Consulta%20pedido%20de%20m%C3%A1s%20de%2020%20unidades" class="inline-flex items-center gap-2 bg-rosa-fuerte text-white px-6 py-2.5 rounded-full text-sm font-semibold hover:bg-lila-oscuro transition-colors shadow-md">
+          <i class="fa-solid fa-paper-plane"></i> Enviar correo a silviiacrea@gmail.com
+        </a>
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-purple-200 pt-5 mt-5">
+        <div class="text-center sm:text-left">
+          <span class="block text-sm text-gray-600">Unidades en el carrito: <strong id="cart-total-count">0</strong></span>
+          <span class="font-serif text-2xl font-bold text-lila-oscuro">Total estimado: <span id="cart-total-price">0.00</span> €</span>
+        </div>
+        <button onclick="clearCart()" class="px-6 py-2 rounded-full border border-lila-oscuro text-lila-oscuro text-sm hover:bg-lila-oscuro hover:text-white transition-colors">
+          Vaciar carrito
+        </button>
+      </div>
+
+      <div id="checkout-section" class="hidden border-t-2 border-dashed border-purple-200 mt-8 pt-8">
+        <h4 class="font-serif text-2xl font-bold text-lila-oscuro mb-2 text-center">Finalizar Pedido</h4>
+        <p class="text-sm text-gray-600 text-center mb-6 max-w-xl mx-auto">
+          Rellena tus datos para enviarme el pedido. <strong>No tienes que pagar nada ahora:</strong> al recibir tu solicitud te escribiré para confirmar los detalles y facilitarte los datos para el pago por <strong>Bizum</strong>.
+        </p>
+
+        <form id="order-form" onsubmit="sendOrderEmail(event)" class="space-y-4 max-w-xl mx-auto">
+          <div>
+            <label class="block text-sm font-medium text-lila-oscuro mb-1">Tu Nombre *</label>
+            <input type="text" id="cust-name" required placeholder="Ej. Laura Gómez" class="w-full border border-purple-200 rounded-xl px-4 py-3 text-sm bg-white/90 focus:outline-none focus:ring-2 focus:ring-lila-medio">
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-sm font-medium text-lila-oscuro mb-1">Tu Correo Electrónico *</label>
+              <input type="email" id="cust-email" required placeholder="tu@correo.com" class="w-full border border-purple-200 rounded-xl px-4 py-3 text-sm bg-white/90 focus:outline-none focus:ring-2 focus:ring-lila-medio">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-lila-oscuro mb-1">Tu Teléfono / WhatsApp *</label>
+              <input
+                type="tel"
+                id="cust-phone"
+                inputmode="numeric"
+                pattern="[0-9]+"
+                maxlength="15"
+                required
+                placeholder="Solo números (ej. 612345678)"
+                title="Introduce únicamente números, sin letras ni espacios"
+                onkeydown="onlyDigitsKeydown(event)"
+                oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                class="w-full border border-purple-200 rounded-xl px-4 py-3 text-sm bg-white/90 focus:outline-none focus:ring-2 focus:ring-lila-medio"
+              >
+            </div>
+          </div>
+          
+          <!-- DIRECCIÓN Y AVISO PENÍNSULA -->
+          <div>
+            <label class="block text-sm font-medium text-lila-oscuro mb-1">Tu Dirección de Envío *</label>
+            <input type="text" id="cust-address" required placeholder="Calle, Número, Piso, Código Postal, Ciudad..." class="w-full border border-purple-200 rounded-xl px-4 py-3 text-sm bg-white/90 focus:outline-none focus:ring-2 focus:ring-lila-medio">
+            <p class="text-xs text-rosa-fuerte mt-1.5 font-semibold"><i class="fa-solid fa-triangle-exclamation"></i> ¡Importante! Solo realizamos envíos dentro de la Península.</p>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium text-lila-oscuro mb-1">Método de pago</label>
+            <div class="bg-purple-50 border border-purple-200 rounded-xl p-3.5 flex items-center gap-3 text-sm text-lila-oscuro">
+              <i class="fa-solid fa-mobile-screen-button text-xl text-rosa-fuerte"></i>
+              <span><strong>Pago por Bizum</strong> (Te enviaré los datos de pago en privado al confirmar tu pedido).</span>
+            </div>
+          </div>
+          <button type="submit" id="submit-btn" class="w-full py-4 rounded-full bg-gradient-to-r from-lila-oscuro to-rosa-fuerte text-white font-semibold shadow-lg hover:shadow-xl hover:scale-[1.01] transition-all flex items-center justify-center gap-2 text-base">
+            <i class="fa-solid fa-paper-plane"></i> Enviar Pedido y Solicitar Bizum
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECCIÓN DE CONTACTO -->
+<section id="contacto" class="py-16 px-6 relative z-10">
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center mb-10">
+      <h3 class="font-serif text-3xl md:text-4xl text-lila-oscuro font-bold mb-3">Contacto</h3>
+      <p class="text-gray-600">¿Tienes alguna duda, quieres preguntar por una idea personalizada o necesitas más de 20 unidades? ¡Escríbeme!</p>
+      <div class="w-16 h-1 bg-lila-suave mx-auto mt-4 rounded-full"></div>
+    </div>
+    <div class="glass-card rounded-2xl p-6 md:p-10">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+        <div class="space-y-5 text-left">
+          <h4 class="font-serif text-2xl font-bold text-lila-oscuro">Hablemos de tu idea</h4>
+          <p class="text-sm text-gray-600 leading-relaxed">Puedes escribirme directamente a mi correo electrónico o por mensaje directo en Instagram. Te responderé lo antes posible.</p>
+          <a href="mailto:silviiacrea@gmail.com" class="flex items-center gap-4 p-4 rounded-2xl bg-white/80 border border-purple-100 hover:border-rosa-fuerte transition-all group">
+            <div class="w-12 h-12 rounded-full bg-rosa-suave text-rosa-fuerte flex items-center justify-center text-xl group-hover:scale-110 transition-transform"><i class="fa-solid fa-envelope"></i></div>
+            <div><span class="block text-xs text-gray-500">Correo electrónico</span><strong class="text-lila-oscuro text-sm sm:text-base">silviiacrea@gmail.com</strong></div>
+          </a>
+          <a href="https://instagram.com/silviiacrea" target="_blank" rel="noopener noreferrer" class="flex items-center gap-4 p-4 rounded-2xl bg-white/80 border border-purple-100 hover:border-lila-medio transition-all group">
+            <div class="w-12 h-12 rounded-full bg-lila-suave text-lila-oscuro flex items-center justify-center text-xl group-hover:scale-110 transition-transform"><i class="fa-brands fa-instagram"></i></div>
+            <div><span class="block text-xs text-gray-500">Instagram oficial</span><strong class="text-lila-oscuro text-sm sm:text-base">@silviiacrea</strong></div>
+          </a>
+        </div>
+        <!-- Formulario de preguntas rápidas -->
+        <form id="contact-form" onsubmit="sendContactQuestion(event)" class="space-y-4 bg-white/60 p-6 rounded-2xl border border-purple-100">
+          <h5 class="font-serif text-lg font-bold text-lila-oscuro mb-1">Envíame un mensaje directo</h5>
+          <div>
+            <label class="block text-xs font-medium text-lila-oscuro mb-1">Tu Nombre *</label>
+            <input type="text" id="q-name" required placeholder="Tu nombre" class="w-full border border-purple-200 rounded-xl px-3.5 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-lila-medio">
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-lila-oscuro mb-1">Tu Correo Electrónico *</label>
+            <input type="email" id="q-email" required placeholder="tu@correo.com" class="w-full border border-purple-200 rounded-xl px-3.5 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-lila-medio">
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-lila-oscuro mb-1">Tu Pregunta o Mensaje *</label>
+            <textarea id="q-message" required rows="3" placeholder="Hola Silvia, quería preguntarte..." class="w-full border border-purple-200 rounded-xl p-3 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-lila-medio"></textarea>
+          </div>
+          <button type="submit" id="q-submit-btn" class="w-full py-3 rounded-full bg-lila-oscuro text-white text-sm font-semibold hover:bg-rosa-fuerte transition-colors shadow-md">
+            <i class="fa-solid fa-paper-plane mr-1"></i> Enviar consulta
+          </button>
+          <p id="q-status" class="text-center text-xs font-medium mt-2 hidden"></p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PIE DE PÁGINA -->
+<footer class="mt-10 border-t border-lila-suave bg-white/30 backdrop-blur-md py-8 relative z-10">
+  <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+    <div class="flex items-center gap-4 text-left">
+      <img src="https://i.imgur.com/d2lznQ4.jpeg" onerror="this.outerHTML='<div class=\'w-14 h-14 rounded-full bg-lila-suave flex items-center justify-center font-serif font-bold text-lila-oscuro border-2 border-white shadow-sm\'>SR</div>'" alt="Logo Silvia Rodríguez" class="w-16 h-16 rounded-full object-cover shadow-sm border-2 border-white">
+      <div>
+        <h4 class="font-serif text-lg font-bold text-lila-oscuro">Silvia Rodríguez</h4>
+        <p class="text-xs text-gray-500 mt-0.5">Contacto: <a href="mailto:silviiacrea@gmail.com" class="underline hover:text-rosa-fuerte">silviiacrea@gmail.com</a></p>
+        <p class="text-xs text-gray-500 mt-0.5">© 2026 Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<a href="https://instagram.com/silviiacrea" target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 z-50 bg-gradient-to-br from-purple-600 via-pink-500 to-orange-400 text-white w-14 h-14 rounded-full flex items-center justify-center text-3xl shadow-lg hover:scale-110 transition-transform">
+  <i class="fa-brands fa-instagram"></i>
+</a>
+
+<!-- TOAST CARRITO -->
+<div id="cart-toast" class="fixed bottom-24 right-6 bg-lila-oscuro text-white px-6 py-3 rounded-lg shadow-xl transform translate-y-20 opacity-0 transition-all duration-300 z-50 flex items-center gap-3" role="status">
+  <i class="fa-solid fa-check-circle text-[#FF77A9]"></i><span class="font-medium text-sm">¡Producto añadido al carrito!</span>
+</div>
+
+<!-- MODAL GENÉRICO -->
+<div id="product-modal" class="fixed inset-0 z-[100] hidden opacity-0 transition-opacity duration-300">
+  <div class="w-full h-full flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+    <div class="bg-white rounded-3xl overflow-hidden max-w-4xl w-full max-h-[90vh] flex flex-col md:flex-row relative shadow-2xl transform scale-95 transition-transform duration-300" id="modal-content-box">
+      <button onclick="closeModal()" class="absolute top-4 right-4 z-10 w-10 h-10 bg-white/80 rounded-full flex items-center justify-center text-gray-700 hover:bg-rosa-fuerte hover:text-white transition-colors shadow-sm">
+        <i class="fa-solid fa-xmark text-xl"></i>
+      </button>
+      <div class="md:w-1/2 h-64 md:h-auto min-h-[300px] relative bg-gray-50 flex items-center justify-center">
+        <img id="modal-img" src="" alt="" class="w-full h-full object-cover hidden">
+        <div id="modal-no-img" class="w-full h-full flex items-center justify-center opacity-30 hidden"><i class="fa-solid fa-camera text-6xl"></i></div>
+      </div>
+      <div class="md:w-1/2 p-8 md:p-10 flex flex-col overflow-y-auto modal-scroll bg-[#FDF4FF]/40">
+        <h3 id="modal-title" class="font-serif text-3xl font-bold text-lila-oscuro mb-2"></h3>
+        <p id="modal-price" class="text-2xl font-medium text-rosa-fuerte mb-6 font-serif hidden"></p>
+        <div class="prose prose-sm text-gray-600 mb-8">
+          <p id="modal-desc" class="whitespace-pre-wrap leading-relaxed"></p>
+        </div>
+        <div class="mt-auto pt-4">
+          <button id="modal-add-btn" class="w-full py-4 rounded-full bg-gradient-to-r from-lila-oscuro to-rosa-fuerte text-white font-semibold shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all text-base hidden">Añadir al carrito</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL CONFIRMACIÓN -->
+<div id="success-modal" class="fixed inset-0 z-[110] hidden opacity-0 transition-opacity duration-300">
+  <div class="w-full h-full flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+    <div class="bg-white rounded-3xl p-8 max-w-sm w-full text-center shadow-2xl transform scale-95 transition-transform duration-300 relative" id="success-content-box">
+      <div class="w-20 h-20 bg-green-100 text-green-500 rounded-full flex items-center justify-center text-4xl mx-auto mb-4 shadow-inner">
+        <i class="fa-solid fa-check"></i>
+      </div>
+      <h3 class="font-serif text-2xl font-bold text-lila-oscuro mb-2">¡Pedido enviado!</h3>
+      <p class="text-gray-600 text-sm mb-6" id="success-message">He recibido tu solicitud. Te he enviado un correo de confirmación y en breve me pondré en contacto contigo para los detalles y el pago.</p>
+      <button onclick="closeSuccessModal()" class="w-full py-3.5 rounded-full bg-lila-oscuro text-white font-semibold shadow-md hover:bg-rosa-fuerte transition-colors">
+        Aceptar
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+// =========================================================================
+// 1. URLS Y CONFIGURACIÓN
+// =========================================================================
+const MI_CORREO = "silviiacrea@gmail.com";
+
+// TU NUEVA URL DEL APPS SCRIPT (Asegúrate de pegar aquí el nuevo enlace)
+const GOOGLE_APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxXP65Qg-l0KrrjKL_maEHQckfVYtCZJkEPEYy-q2bZfMjt2ulpOuQdsQ7yrVIreKI/exec";
+
+const GOOGLE_SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTFvHjbJm2Un0d-e50hrjBDBg_wGe6Jn2PcFGLJN9piYJKjcl-LuStr7ooU35TK0AQhxc0gkW8zvVeV/pub?gid=0&single=true&output=csv";
+const NEW_SHEET_ID = "17PvFhvVBerBzEvKhTAJ_379fdSMWvf7ZjcYzmylXbTg";
+const GOOGLE_SHEET_ESPECIALIDADES_CSV_URL = `https://docs.google.com/spreadsheets/d/${NEW_SHEET_ID}/gviz/tq?tqx=out:csv&sheet=ESPECIALIDADES`;
+const GOOGLE_SHEET_TRABAJOS_CSV_URL = `https://docs.google.com/spreadsheets/d/${NEW_SHEET_ID}/gviz/tq?tqx=out:csv&sheet=TRABAJOS`;
+
+const CART_STORAGE_KEY = "silviiacrea_cart_persistent";
+const LEGACY_CART_KEY = "silviiacrea_cart_data";
+const WINDOW_NAME_PREFIX = "SILVIIACREA_CART:";
+
+let products = [];
+let galleryItems = [];
+let specialties = [];
+let cartItems = [];
+let isCartInitialized = false;
+let toastTimeout;
+
+function parseCSVLine(line) {
+  return line.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/).map(c => c.replace(/^"|"$/g, '').trim());
+}
+
+// Restricción de teclas para permitir solo dígitos y teclas de control en Teléfono / WhatsApp
+function onlyDigitsKeydown(e) {
+  const allowedKeys = ['Backspace', 'Delete', 'Tab', 'Escape', 'Enter', 'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Home', 'End'];
+  if (allowedKeys.includes(e.key) || e.ctrlKey || e.metaKey) return;
+  if (!/^[0-9]$/.test(e.key)) {
+    e.preventDefault();
+  }
+}
+
+// =========================================================================
+// FUNCIONES DE PERSISTENCIA DEL CARRITO (SIN CADUCIDAD + TRIPLE RESPALDO)
+// =========================================================================
+function getCookieValue(name) {
+  try {
+    const match = document.cookie.match(new RegExp('(?:^|; )' + name.replace(/([.$?*|{}()[\]\\/+^])/g, '\\$1') + '=([^;]*)'));
+    return match ? decodeURIComponent(match[1]) : null;
+  } catch (e) {
+    return null;
+  }
+}
+
+function saveCart() {
+  if (!isCartInitialized) return;
+  const serialized = JSON.stringify({ items: cartItems });
+
+  // 1. Almacenamiento principal permanente en localStorage
+  try {
+    localStorage.setItem(CART_STORAGE_KEY, serialized);
+  } catch (e) {
+    console.warn("localStorage no disponible:", e);
+  }
+
+  // 2. Respaldo en cookie (1 año de duración)
+  try {
+    document.cookie = `${CART_STORAGE_KEY}=${encodeURIComponent(serialized)}; max-age=31536000; path=/; SameSite=Lax`;
+  } catch (e) {}
+
+  // 3. Respaldo en window.name para recargas en entornos locales o restringidos
+  try {
+    window.name = WINDOW_NAME_PREFIX + serialized;
+  } catch (e) {}
+}
+
+function parseStoredCart(raw) {
+  if (!raw) return null;
+  try {
+    const parsed = JSON.parse(raw);
+    if (Array.isArray(parsed)) return parsed;
+    if (parsed && Array.isArray(parsed.items)) return parsed.items;
+  } catch (e) {}
+  return null;
+}
+
+function loadCart() {
+  let loaded = null;
+
+  // Intentamos recuperar por orden de prioridad: localStorage -> Cookie -> window.name -> clave antigua
+  try {
+    loaded = parseStoredCart(localStorage.getItem(CART_STORAGE_KEY));
+  } catch (e) {}
+
+  if (loaded === null) {
+    loaded = parseStoredCart(getCookieValue(CART_STORAGE_KEY));
+  }
+
+  if (loaded === null) {
+    try {
+      if (window.name && window.name.startsWith(WINDOW_NAME_PREFIX)) {
+        loaded = parseStoredCart(window.name.slice(WINDOW_NAME_PREFIX.length));
+      }
+    } catch (e) {}
+  }
+
+  if (loaded === null) {
+    try {
+      loaded = parseStoredCart(localStorage.getItem(LEGACY_CART_KEY));
+    } catch (e) {}
+  }
+
+  cartItems = Array.isArray(loaded) ? loaded : [];
+  isCartInitialized = true;
+  updateCart();
+}
+
+// =========================================================================
+// MODAL COMPARTIDO
+// =========================================================================
+function openGenericModal(title, priceStr, desc, imageStr, isProduct, productIndex) {
+  const modal = document.getElementById('product-modal');
+  const imgEl = document.getElementById('modal-img');
+  const noImgEl = document.getElementById('modal-no-img');
+  const priceEl = document.getElementById('modal-price');
+  const btn = document.getElementById('modal-add-btn');
+
+  if (imageStr && imageStr.trim() !== "") {
+    imgEl.src = imageStr; imgEl.classList.remove('hidden'); noImgEl.classList.add('hidden');
+  } else {
+    imgEl.src = ""; imgEl.classList.add('hidden'); noImgEl.classList.remove('hidden');
+  }
+
+  document.getElementById('modal-title').innerText = title;
+  document.getElementById('modal-desc').innerText = desc;
+  
+  if (isProduct) {
+    priceEl.innerText = priceStr;
+    priceEl.classList.remove('hidden');
+    btn.classList.remove('hidden');
+    
+    const prod = products[productIndex];
+    if(prod.stock > 0) {
+      btn.innerText = 'Añadir al carrito'; btn.disabled = false;
+      btn.className = 'w-full py-4 rounded-full bg-gradient-to-r from-lila-oscuro to-rosa-fuerte text-white font-semibold shadow-lg hover:shadow-xl hover:scale-[1.02] transition-all text-base';
+      btn.onclick = () => { addToCart(productIndex); closeModal(); };
+    } else {
+      btn.innerText = 'Sin stock'; btn.disabled = true;
+      btn.className = 'w-full py-4 rounded-full border border-gray-300 text-gray-400 font-medium bg-gray-50 cursor-not-allowed text-base';
+      btn.onclick = null;
+    }
+  } else {
+    priceEl.classList.add('hidden');
+    btn.classList.add('hidden');
+  }
+
+  document.body.style.overflow = 'hidden';
+  modal.classList.remove('hidden');
+  modal.classList.add('flex');
+  setTimeout(() => { modal.classList.remove('opacity-0'); document.getElementById('modal-content-box').classList.remove('scale-95'); }, 10);
+}
+
+function closeModal() {
+  const modal = document.getElementById('product-modal');
+  modal.classList.add('opacity-0');
+  document.getElementById('modal-content-box').classList.add('scale-95');
+  setTimeout(() => { modal.classList.add('hidden'); modal.classList.remove('flex'); document.body.style.overflow = 'auto'; }, 300);
+}
+
+// =========================================================================
+// 2. SISTEMA DE ESPECIALIDADES DESDE GOOGLE SHEETS
+// =========================================================================
+async function loadSpecialties() {
+  if (GOOGLE_SHEET_ESPECIALIDADES_CSV_URL.trim() !== "") {
+    try {
+      const response = await fetch(GOOGLE_SHEET_ESPECIALIDADES_CSV_URL);
+      specialties = parseSpecialtiesCSV(await response.text());
+    } catch (e) {
+      console.error("Error cargando especialidades", e);
+    }
+  }
+  renderSpecialties();
+}
+
+function parseSpecialtiesCSV(csv) {
+  const lines = csv.split('\n').filter(l => l.trim() !== '');
+  const result = [];
+  for (let i = 1; i < lines.length; i++) {
+    const cols = parseCSVLine(lines[i]);
+    if (cols[0]) {
+      result.push({
+        name: cols[0] || "",
+        description: cols[1] || "",
+        image: cols[2] || "",
+        detailedDesc: cols[3] || "",
+        largeImage: cols[4] || "",
+        featured: (cols[5] && cols[5].toUpperCase() === 'SI') || (cols[5] && cols[5].toUpperCase() === 'TRUE') || (cols[5] === '1')
+      });
+    }
+  }
+  return result;
+}
+
+function renderSpecialties() {
+  const grid = document.getElementById('specialties-grid');
+  const wrapper = document.getElementById('specialties-wrapper');
+  grid.innerHTML = '';
+  
+  const n = specialties.length + 1;
+  const galleryIndex = Math.min(2, specialties.length);
+
+  if (n >= 5) {
+    wrapper.className = 'w-full max-w-7xl mx-auto';
+    grid.className = 'flex overflow-x-auto gap-6 pb-8 snap-x snap-mandatory styled-scroll px-6';
+  } else if (n === 4) {
+    wrapper.className = 'w-full max-w-7xl mx-auto';
+    grid.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-6 pb-8';
+  } else {
+    wrapper.className = 'w-full max-w-7xl mx-auto';
+    grid.className = 'flex flex-wrap justify-center gap-6 px-6 pb-8';
+  }
+
+  let specIndex = 0;
+
+  for (let i = 0; i < n; i++) {
+    const themeIndex = i % 2; 
+
+    if (i === galleryIndex) {
+      const galleryCard = document.createElement('a');
+      galleryCard.href = "#galeria";
+      let gCardClasses = `rounded-2xl overflow-hidden group flex flex-col relative product-card card-theme-${themeIndex}`;
+      
+      if (n >= 5) gCardClasses += ' min-w-[260px] w-[260px] sm:min-w-[300px] sm:w-[300px] snap-center shrink-0';
+      else if (n === 4) gCardClasses += ' w-full'; 
+      else gCardClasses += ' w-full sm:w-[300px] max-w-[320px]'; 
+      
+      galleryCard.className = gCardClasses;
+      
+      galleryCard.innerHTML = `
+        <div class="relative overflow-hidden aspect-square flex items-center justify-center cursor-pointer group/img">
+          <img src="https://i.imgur.com/d2lznQ4.jpeg" alt="Galería de trabajos" class="w-full h-full object-cover group-hover/img:scale-110 transition-transform duration-500">
+          <div class="absolute inset-0 bg-black/10 opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex items-center justify-center z-10">
+             <div class="w-12 h-12 bg-white/90 rounded-full flex items-center justify-center text-lila-oscuro shadow-lg transform scale-50 group-hover/img:scale-100 transition-transform duration-300"><i class="fa-solid fa-arrow-down text-xl"></i></div>
+          </div>
+        </div>
+        <div class="p-5 flex flex-col flex-grow bg-white/40 cursor-pointer">
+          <h4 class="font-serif text-lg font-bold text-gray-800 mb-1 group-hover:text-lila-oscuro transition-colors">Galería</h4>
+          <p class="text-gray-700 text-sm flex-grow">Descubre más fotografías de mis creaciones y trabajos.</p>
+          <span class="inline-block mt-3 text-lila-oscuro text-sm font-bold">Ver todos <i class="fa-solid fa-arrow-right ml-1"></i></span>
+        </div>
+      `;
+      grid.appendChild(galleryCard);
+    } else {
+      if (specIndex >= specialties.length) continue;
+
+      const spec = specialties[specIndex];
+      const currentIndex = specIndex; 
+      
+      const card = document.createElement('div');
+      let cardClasses = `rounded-2xl overflow-hidden group flex flex-col relative product-card card-theme-${themeIndex}`;
+      
+      if (n >= 5) cardClasses += ' min-w-[260px] w-[260px] sm:min-w-[300px] sm:w-[300px] snap-center shrink-0';
+      else if (n === 4) cardClasses += ' w-full'; 
+      else cardClasses += ' w-full sm:w-[300px] max-w-[320px]'; 
+      
+      if(spec.featured) cardClasses += ' destacado-animado';
+
+      card.className = cardClasses;
+
+      const badgeHTML = spec.featured ? `<div class="absolute top-3 left-3 bg-lila-oscuro text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-md z-20">Destacado</div>` : '';
+      const imageHTML = spec.image && spec.image.trim() !== "" 
+        ? `<img src="${spec.image}" alt="${spec.name}" class="w-full h-full object-cover group-hover/img:scale-110 transition-transform duration-500">`
+        : `<div class="w-full h-full flex items-center justify-center opacity-40"><i class="fa-solid fa-camera text-5xl"></i></div>`;
+
+      card.innerHTML = `
+        <div class="relative overflow-hidden aspect-square flex items-center justify-center cursor-pointer group/img" onclick="openSpecialtyModal(${currentIndex})">
+          ${imageHTML}
+          <div class="absolute inset-0 bg-black/10 opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex items-center justify-center z-10">
+             <div class="w-12 h-12 bg-white/90 rounded-full flex items-center justify-center text-lila-oscuro shadow-lg transform scale-50 group-hover/img:scale-100 transition-transform duration-300"><i class="fa-solid fa-expand text-xl"></i></div>
+          </div>
+          ${badgeHTML}
+        </div>
+        <div class="p-5 flex flex-col flex-grow bg-white/40 cursor-pointer" onclick="openSpecialtyModal(${currentIndex})">
+          <h4 class="font-serif text-lg font-bold text-gray-800 mb-1 group-hover:text-lila-oscuro transition-colors">${spec.name}</h4>
+          <p class="text-gray-700 text-sm flex-grow">${spec.description}</p>
+        </div>
+      `;
+      grid.appendChild(card);
+      specIndex++;
+    }
+  }
+}
+
+function openSpecialtyModal(index) {
+  const spec = specialties[index];
+  const finalImage = (spec.largeImage && spec.largeImage.trim() !== '') ? spec.largeImage : spec.image;
+  const finalDesc = (spec.detailedDesc && spec.detailedDesc.trim() !== '') ? spec.detailedDesc : spec.description;
+  openGenericModal(spec.name, '', finalDesc, finalImage, false, null);
+}
+
+// =========================================================================
+// 3. SISTEMA DE CATÁLOGO (PRODUCTOS)
+// =========================================================================
+async function loadProducts() {
+  if (GOOGLE_SHEET_CSV_URL.trim() !== "") {
+    try {
+      const response = await fetch(GOOGLE_SHEET_CSV_URL);
+      products = parseProductsCSV(await response.text());
+    } catch (e) { console.error("Error", e); }
+  }
+  renderProducts();
+}
+
+function parseProductsCSV(csv) {
+  const lines = csv.split('\n').filter(l => l.trim() !== '');
+  const result = [];
+  for (let i = 1; i < lines.length; i++) {
+    const cols = parseCSVLine(lines[i]);
+    if (cols[0]) {
+      let stockValue = 99; 
+      if (cols[4] !== undefined && cols[4] !== "") {
+        stockValue = parseInt(cols[4]);
+        if(isNaN(stockValue)) stockValue = 0; 
+      }
+      result.push({
+        name: cols[0] || "Producto", description: cols[1] || "", price: parseFloat((cols[2] || "0").replace(',', '.')) || 0,
+        image: cols[3] || "", stock: stockValue, detailedDesc: cols[5] || "", largeImage: cols[6] || ""
+      });
+    }
+  }
+  return result;
+}
+
+function renderProducts() {
+  const grid = document.getElementById('product-grid');
+  const wrapper = document.getElementById('product-wrapper');
+  const desc = document.getElementById('catalogo-desc');
+  grid.innerHTML = '';
+  const n = products.length;
+
+  if (n === 0) return grid.innerHTML = '<p class="w-full text-center py-10 text-gray-500">Todavía no hay productos.</p>';
+
+  if (n >= 5) {
+    wrapper.className = 'w-full max-w-7xl mx-auto';
+    grid.className = 'flex overflow-x-auto gap-6 pb-8 snap-x snap-mandatory styled-scroll px-6';
+    if(desc) desc.innerHTML = 'Explora mis creaciones y encarga tu favorita. <strong>Desliza para ver más.</strong>';
+  } else if (n === 4) {
+    wrapper.className = 'w-full max-w-7xl mx-auto';
+    grid.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-6';
+  } else {
+    wrapper.className = 'w-full max-w-7xl mx-auto';
+    grid.className = 'flex flex-wrap justify-center gap-6 px-6';
+  }
+
+  products.forEach((prod, index) => {
+    const card = document.createElement('div');
+    const themeIndex = index % 2; 
+    let cardClasses = `rounded-2xl overflow-hidden group flex flex-col relative product-card card-theme-${themeIndex}`;
+    
+    if (n >= 5) cardClasses += ' min-w-[260px] w-[260px] sm:min-w-[300px] sm:w-[300px] snap-center shrink-0';
+    else if (n === 4) cardClasses += ' w-full'; 
+    else cardClasses += ' w-full sm:w-[300px] max-w-[320px]'; 
+    card.className = cardClasses;
+
+    let stockStatus = '';
+    if (prod.stock <= 0) stockStatus = `<span class="text-xs font-bold text-red-500 block mb-3"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Agotado</span>`;
+    else if (prod.stock < 5) stockStatus = `<span class="text-xs font-bold text-orange-500 block mb-3"><i class="fa-solid fa-clock mr-1"></i> ¡Pocas unidades!</span>`;
+
+    const buttonHTML = prod.stock > 0
+      ? `<button onclick="addToCart(${index})" class="w-full py-2.5 rounded-full border-2 bg-transparent font-semibold transition-colors card-btn">Añadir al carrito</button>`
+      : `<button disabled class="w-full py-2.5 rounded-full border border-gray-300 text-gray-400 font-medium bg-white/50 cursor-not-allowed">Sin stock</button>`;
+
+    const imageHTML = prod.image && prod.image.trim() !== "" 
+      ? `<img src="${prod.image}" alt="${prod.name}" class="w-full h-full object-cover group-hover/img:scale-110 transition-transform duration-500">`
+      : `<div class="w-full h-full flex items-center justify-center opacity-40"><i class="fa-solid fa-camera text-5xl"></i></div>`;
+
+    card.innerHTML = `
+      <div class="relative overflow-hidden aspect-square flex items-center justify-center cursor-pointer group/img" onclick="openProductModal(${index})">
+        ${imageHTML}
+        <div class="absolute inset-0 bg-black/10 opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex items-center justify-center z-10">
+           <div class="w-12 h-12 bg-white/90 rounded-full flex items-center justify-center text-lila-oscuro shadow-lg transform scale-50 group-hover/img:scale-100 transition-transform duration-300"><i class="fa-solid fa-expand text-xl"></i></div>
+        </div>
+        <span class="absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm text-lila-oscuro font-serif font-bold px-3 py-1 rounded-full text-sm shadow-sm z-20">${prod.price.toFixed(2)} €</span>
+      </div>
+      <div class="p-5 flex flex-col flex-grow">
+        <h4 class="font-serif text-lg font-bold text-gray-800 mb-1 cursor-pointer hover:text-lila-oscuro transition-colors" onclick="openProductModal(${index})">${prod.name}</h4>
+        <p class="text-gray-700 text-sm mb-2 flex-grow">${prod.description}</p>
+        ${stockStatus}
+        ${buttonHTML}
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function openProductModal(index) {
+  const prod = products[index];
+  const finalImage = (prod.largeImage && prod.largeImage.trim() !== '') ? prod.largeImage : prod.image;
+  const finalDesc = (prod.detailedDesc && prod.detailedDesc.trim() !== '') ? prod.detailedDesc : prod.description;
+  openGenericModal(prod.name, prod.price.toFixed(2) + ' €', finalDesc, finalImage, true, index);
+}
+
+// =========================================================================
+// 4. SISTEMA DE GALERÍA (TRABAJOS)
+// =========================================================================
+async function loadGallery() {
+  if (GOOGLE_SHEET_TRABAJOS_CSV_URL.trim() !== "") {
+    try {
+      const response = await fetch(GOOGLE_SHEET_TRABAJOS_CSV_URL);
+      galleryItems = parseGalleryCSV(await response.text());
+    } catch (e) { console.error("Error", e); }
+  }
+  renderGallery();
+}
+
+function parseGalleryCSV(csv) {
+  const lines = csv.split('\n').filter(l => l.trim() !== '');
+  const result = [];
+  for (let i = 1; i < lines.length; i++) {
+    const cols = parseCSVLine(lines[i]);
+    if (cols[0]) {
+      result.push({ 
+        title: cols[0] || "", 
+        image: cols[1] || "", 
+        desc: cols[2] || "",
+        detailedDesc: cols[3] || "",
+        largeImage: cols[4] || ""    
+      });
+    }
+  }
+  return result;
+}
+
+function renderGallery() {
+  const grid = document.getElementById('gallery-grid');
+  const wrapper = document.getElementById('gallery-wrapper');
+  grid.innerHTML = '';
+  const n = galleryItems.length;
+
+  if (n === 0) return grid.innerHTML = '<p class="w-full text-center py-10 text-gray-500">Todavía no hay trabajos.</p>';
+
+  if (n >= 5) {
+    wrapper.className = 'w-full max-w-7xl mx-auto';
+    grid.className = 'flex overflow-x-auto gap-6 pb-8 snap-x snap-mandatory styled-scroll px-6';
+  } else if (n === 4) {
+    wrapper.className = 'w-full max-w-7xl mx-auto';
+    grid.className = 'grid grid-cols-2 sm:grid-cols-4 gap-6 px-6';
+  } else {
+    wrapper.className = 'w-full max-w-7xl mx-auto';
+    grid.className = 'flex flex-wrap justify-center gap-6 px-6';
+  }
+
+  galleryItems.forEach((item, index) => {
+    const card = document.createElement('div');
+    const themeIndex = index % 2; 
+    let cardClasses = `rounded-2xl overflow-hidden group relative flex flex-col product-card card-theme-${themeIndex}`;
+    if (n >= 5) cardClasses += ' min-w-[200px] w-[200px] sm:min-w-[260px] sm:w-[260px] snap-center shrink-0';
+    else if (n === 4) cardClasses += ' w-full'; 
+    else cardClasses += ' w-full max-w-[260px]'; 
+    card.className = cardClasses;
+
+    const imageHTML = item.image && item.image.trim() !== "" 
+      ? `<img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover group-hover/img:scale-110 transition-transform duration-500">`
+      : `<div class="w-full h-full flex items-center justify-center opacity-40 min-h-[200px]"><i class="fa-solid fa-camera text-6xl"></i></div>`;
+
+    card.innerHTML = `
+      <div class="relative overflow-hidden aspect-square flex items-center justify-center cursor-pointer group/img" onclick="openGalleryModal(${index})">
+        ${imageHTML}
+        <div class="absolute inset-0 bg-black/10 opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 flex items-center justify-center z-10">
+           <div class="w-12 h-12 bg-white/90 rounded-full flex items-center justify-center text-lila-oscuro shadow-lg transform scale-50 group-hover/img:scale-100 transition-transform duration-300"><i class="fa-solid fa-expand text-xl"></i></div>
+        </div>
+      </div>
+      <div class="p-5 flex flex-col flex-grow bg-white/40 cursor-pointer" onclick="openGalleryModal(${index})">
+        <h4 class="font-serif text-lg font-bold text-gray-800 mb-1 group-hover:text-lila-oscuro transition-colors">${item.title}</h4>
+        <p class="text-gray-700 text-sm flex-grow">${item.desc}</p>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function openGalleryModal(index) {
+  const item = galleryItems[index];
+  const finalImage = (item.largeImage && item.largeImage.trim() !== '') ? item.largeImage : item.image;
+  const finalDesc = (item.detailedDesc && item.detailedDesc.trim() !== '') ? item.detailedDesc : item.desc;
+  openGenericModal(item.title, '', finalDesc, finalImage, false, null);
+}
+
+// =========================================================================
+// 5. CARRITO
+// =========================================================================
+function addToCart(productIndex) {
+  const prod = products[productIndex];
+  if (prod.stock <= 0) return;
+  const existing = cartItems.find(item => item.name === prod.name);
+  if (existing) {
+    if (existing.quantity !== 'mas_de_20') existing.quantity = Math.min(Math.min(20, prod.stock), existing.quantity + 1);
+  } else {
+    cartItems.push({ name: prod.name, price: prod.price, quantity: 1, comment: '' });
+  }
+  updateCart();
+  const toast = document.getElementById('cart-toast');
+  toast.classList.remove('translate-y-20', 'opacity-0');
+  clearTimeout(toastTimeout);
+  toastTimeout = setTimeout(() => toast.classList.add('translate-y-20', 'opacity-0'), 3000);
+}
+
+function updateCart() {
+  const hasBulk = cartItems.some(item => item.quantity === 'mas_de_20');
+  const totalUnits = cartItems.reduce((sum, item) => sum + (item.quantity === 'mas_de_20' ? 21 : item.quantity), 0);
+  const totalPrice = cartItems.reduce((sum, item) => sum + (item.price * (item.quantity === 'mas_de_20' ? 20 : item.quantity)), 0);
+
+  document.getElementById('cart-count').innerText = hasBulk ? '+20' : totalUnits;
+  document.getElementById('cart-total-count').innerText = hasBulk ? '+20 (A consultar)' : totalUnits;
+  document.getElementById('cart-total-price').innerText = totalPrice.toFixed(2) + (hasBulk ? ' +' : '');
+  document.getElementById('bulk-order-alert').classList.toggle('hidden', !hasBulk);
+
+  const checkoutSection = document.getElementById('checkout-section');
+  const container = document.getElementById('cart-items');
+  container.innerHTML = '';
+
+  if (!cartItems.length) {
+    container.textContent = 'Todavía no has añadido ningún producto.';
+    container.className = 'text-gray-600 text-center py-4';
+    checkoutSection.classList.add('hidden');
+    saveCart(); 
+    return;
+  }
+
+  checkoutSection.classList.remove('hidden');
+  container.className = 'text-gray-600 space-y-4';
+
+  cartItems.forEach((item, index) => {
+    const card = document.createElement('div');
+    card.className = 'bg-white/70 rounded-xl p-4 text-left border border-purple-100';
+    const originalProd = products.find(p => p.name === item.name);
+    const limit = originalProd ? Math.min(20, Math.max(1, originalProd.stock)) : 20;
+    
+    let optionsHTML = Array.from({length: limit}, (_, i) => `<option value="${i+1}" ${i+1 === item.quantity ? 'selected' : ''}>${i+1}</option>`).join('');
+    if ((!originalProd && item.quantity === 'mas_de_20') || (originalProd && originalProd.stock > 20)) {
+      optionsHTML += `<option value="mas_de_20" ${item.quantity === 'mas_de_20' ? 'selected' : ''}>+ de 20</option>`;
+    }
+
+    card.innerHTML = `
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div><strong class="text-lila-oscuro text-base">${item.name}</strong><span class="text-xs text-gray-500 ml-2">(${Number(item.price).toFixed(2)} € / ud.)</span></div>
+        <div class="flex items-center gap-3">
+          <label class="text-sm">Cantidad:
+            <select onchange="changeQty(${index}, this.value)" class="border border-purple-200 rounded-lg px-2.5 py-1.5 bg-white text-sm ml-1 font-medium text-lila-oscuro">${optionsHTML}</select>
+          </label>
+          <button type="button" onclick="removeItem(${index})" class="text-rosa-fuerte hover:text-lila-oscuro text-sm font-medium">Eliminar</button>
+        </div>
+      </div>
+      <label class="block text-xs text-lila-oscuro font-medium mt-3">Comentario o personalización:</label>
+      <textarea oninput="changeComment(${index}, this.value)" rows="2" placeholder="Colores, nombres o indicaciones especiales..." class="w-full mt-1 border border-purple-200 rounded-xl p-2.5 text-sm bg-white/90 focus:outline-none focus:ring-2 focus:ring-purple-200"></textarea>
+    `;
+
+    // Asignamos el valor directamente por propiedad para evitar fallos con comillas o caracteres especiales
+    const textarea = card.querySelector('textarea');
+    if (textarea) {
+      textarea.value = item.comment || '';
+    }
+
+    container.appendChild(card);
+  });
+  
+  saveCart();
+}
+
+function changeQty(index, val) {
+  const item = cartItems[index];
+  const maxStock = products.find(p => p.name === item.name)?.stock || 20;
+  cartItems[index].quantity = val === 'mas_de_20' ? 'mas_de_20' : Math.max(1, Math.min(Math.min(20, maxStock), parseInt(val, 10) || 1));
+  updateCart();
+}
+
+// Solo guarda el comentario en memoria y almacenamiento sin redibujar el DOM, manteniendo el foco del cursor
+function changeComment(index, val) {
+  if (!cartItems[index]) return;
+  cartItems[index].comment = val;
+  saveCart();
+}
+
+function removeItem(index) { cartItems.splice(index, 1); updateCart(); }
+function clearCart() { cartItems = []; updateCart(); }
+
+// =========================================================================
+// 6. FORMULARIO RÁPIDO DE CONTACTO
+// =========================================================================
+async function sendContactQuestion(e) {
+  e.preventDefault();
+  const btn = document.getElementById('q-submit-btn');
+  const status = document.getElementById('q-status');
+  
+  const name = document.getElementById('q-name').value;
+  const email = document.getElementById('q-email').value;
+  const message = document.getElementById('q-message').value;
+
+  const originalText = btn.innerHTML;
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1"></i> Enviando...';
+
+  try {
+    await fetch("https://formsubmit.co/ajax/silviiacrea@gmail.com", {
+      method: "POST",
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        _subject: `Nueva consulta de web de ${name}`,
+        Nombre: name,
+        Email: email,
+        Mensaje: message
+      })
+    });
+    
+    document.getElementById('contact-form').reset();
+    status.innerText = "¡Mensaje enviado correctamente!";
+    status.className = "text-center text-xs font-medium mt-2 text-green-600";
+    status.classList.remove('hidden');
+  } catch(error) {
+    status.innerText = "Error al enviar. Por favor, escríbeme directamente al correo.";
+    status.className = "text-center text-xs font-medium mt-2 text-red-500";
+    status.classList.remove('hidden');
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = originalText;
+  }
+}
+
+// =========================================================================
+// 7. ENVÍO DE PEDIDOS AL GOOGLE SHEET
+// =========================================================================
+async function sendOrderEmail(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submit-btn');
+  const phoneInput = document.getElementById('cust-phone');
+
+  const name = document.getElementById('cust-name').value;
+  const email = document.getElementById('cust-email').value;
+  const phone = phoneInput.value.replace(/[^0-9]/g, '');
+  const address = document.getElementById('cust-address').value;
+
+  if (!phone) {
+    phoneInput.focus();
+    return;
+  }
+
+  const totalPrice = cartItems.reduce((sum, item) => sum + (item.price * (item.quantity === 'mas_de_20' ? 20 : item.quantity)), 0).toFixed(2);
+  const summaryLines = cartItems.map(i => `- ${i.quantity === 'mas_de_20' ? '+20x' : i.quantity+'x'} ${i.name} | Personalización: ${i.comment || 'Sin detalles'}`).join('\n');
+
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Procesando tu pedido...';
+
+  try {
+    const payload = {
+      Cliente: name,
+      Email: email,
+      Telefono: phone,
+      Direccion: address,
+      Total: `${totalPrice} €`,
+      Productos: summaryLines
+    };
+
+    // Usamos mode: no-cors y texto plano para forzar el envío ignorando bloqueos del navegador
+    await fetch(GOOGLE_APP_SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "text/plain" },
+      body: JSON.stringify(payload)
+    });
+
+    try {
+      await fetch("https://formsubmit.co/ajax/silviiacrea@gmail.com", {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          _subject: `NUEVO PEDIDO DE: ${name}`,
+          Cliente: name,
+          Email: email,
+          Telefono: phone,
+          Direccion: address,
+          Total: `${totalPrice} €`,
+          Productos: summaryLines
+        })
+      });
+    } catch(errFormSubmit) {}
+
+    openSuccessModal();
+    clearCart();
+    document.getElementById('order-form').reset();
+  } catch (err) {
+    const mailtoBody = encodeURIComponent(`¡Hola Silvia!\n\n${summaryLines}\n\nTotal: ${totalPrice} €\n\nDirección: ${address}\n\n- Nombre: ${name}\n- Email: ${email}\n- Teléfono: ${phone}`);
+    window.location.href = `mailto:${MI_CORREO}?subject=Nuevo Pedido Web - ${name}&body=${mailtoBody}`;
+  } finally {
+    setTimeout(() => {
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Enviar Pedido y Solicitar Bizum';
+    }, 2000);
+  }
+}
+
+function openSuccessModal() {
+  const modal = document.getElementById('success-modal');
+  document.body.style.overflow = 'hidden';
+  modal.classList.remove('hidden');
+  modal.classList.add('flex');
+  setTimeout(() => { modal.classList.remove('opacity-0'); document.getElementById('success-content-box').classList.remove('scale-95'); }, 10);
+}
+
+function closeSuccessModal() {
+  const modal = document.getElementById('success-modal');
+  modal.classList.add('opacity-0');
+  document.getElementById('success-content-box').classList.add('scale-95');
+  setTimeout(() => { modal.classList.add('hidden'); modal.classList.remove('flex'); document.body.style.overflow = 'auto'; }, 300);
+}
+
+// =========================================================================
+// INICIALIZACIÓN SECUENCIAL ASEGURADA AL CARGAR EL DOM
+// =========================================================================
+async function initApp() {
+  loadCart();
+  await loadSpecialties();
+  await loadProducts();
+
+  // Sincroniza precios y límites de stock reales del catálogo sin interrumpir si el usuario ya está escribiendo
+  if (cartItems.length > 0) {
+    let changed = false;
+    cartItems.forEach(item => {
+      const prod = products.find(p => p.name === item.name);
+      if (prod && item.price !== prod.price) {
+        item.price = prod.price;
+        changed = true;
+      }
+    });
+    const cartContainer = document.getElementById('cart-items');
+    if (changed || (cartContainer && !cartContainer.contains(document.activeElement))) {
+      updateCart();
+    }
+  }
+
+  loadGallery();
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initApp);
+} else {
+  initApp();
+}
+</script>
+
+</body>
+</html>
