@@ -123,10 +123,9 @@ body {
 .dust {
   position: absolute; background: white; border-radius: 50%;
   box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.8), 0 0 12px 4px rgba(255, 119, 169, 0.4);
-  opacity: 0; will-change: transform, opacity; /* Optimización GPU vital */
+  opacity: 0; will-change: transform, opacity;
 }
 
-/* Diferentes trayectorias cruzando la pantalla */
 @keyframes drift-up-right {
   0% { transform: translate3d(0, 0, 0) scale(0.5); opacity: 0; }
   20% { opacity: 0.8; transform: translate3d(15vw, -20vh, 0) scale(1.2); }
@@ -156,7 +155,6 @@ body {
   100% { transform: translate3d(15vw, -100vh, 0) scale(0.5); opacity: 0; }
 }
 
-/* Aplicación de las trayectorias a diferentes estrellitas repartidas */
 .d-1 { left: 10%; top: 90%; width: 4px; height: 4px; animation: drift-up-right 22s linear infinite; }
 .d-2 { left: 80%; top: 10%; width: 3px; height: 3px; animation: drift-down-left 28s linear infinite; animation-delay: 2s; }
 .d-3 { left: 5%; top: 40%; width: 5px; height: 5px; animation: drift-across 35s linear infinite; animation-delay: 5s; }
@@ -168,7 +166,62 @@ body {
 .d-9 { left: 20%; top: 75%; width: 4px; height: 4px; animation: drift-spiral 29s linear infinite; animation-delay: 4s; }
 .d-10 { left: 85%; top: 50%; width: 5px; height: 5px; animation: drift-across 32s linear infinite reverse; animation-delay: 18s; }
 
-@media(prefers-reduced-motion:reduce) { .dust { animation: none !important; } }
+/* =========================================================================
+   MARIPOSAS COZY OPTIMIZADAS (Aceleración GPU + Sin sombras pesadas)
+   ========================================================================= */
+.butterfly-container { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+.butterfly-wrap { position: absolute; will-change: transform; opacity: 0.65; }
+.butterfly { will-change: transform; animation: butterfly-flap 1.5s ease-in-out infinite alternate; }
+.butterfly svg { width: 100%; height: 100%; display: block; }
+
+/* Aleteo simplificado */
+@keyframes butterfly-flap {
+  0% { transform: scaleX(1) translateY(0); }
+  100% { transform: scaleX(0.4) translateY(-3px); }
+}
+
+/* Rutas usando solo translate3d (Súper rápidas para el procesador) */
+@keyframes flutter-right {
+  0% { transform: translate3d(-10vw, 80vh, 0) rotate(15deg); }
+  50% { transform: translate3d(50vw, 65vh, 0) rotate(5deg); }
+  100% { transform: translate3d(110vw, 40vh, 0) rotate(20deg); }
+}
+
+@keyframes flutter-left {
+  0% { transform: translate3d(110vw, 30vh, 0) rotate(-15deg) scaleX(-1); }
+  50% { transform: translate3d(40vw, 45vh, 0) rotate(-5deg) scaleX(-1); }
+  100% { transform: translate3d(-10vw, 20vh, 0) rotate(-20deg) scaleX(-1); }
+}
+
+@keyframes flutter-up {
+  0% { transform: translate3d(30vw, 110vh, 0) rotate(-5deg); }
+  50% { transform: translate3d(45vw, 40vh, 0) rotate(10deg); }
+  100% { transform: translate3d(20vw, -10vh, 0) rotate(0deg); }
+}
+
+@keyframes flutter-diagonal {
+  0% { transform: translate3d(-10vw, 10vh, 0) rotate(25deg); }
+  50% { transform: translate3d(50vw, 45vh, 0) rotate(10deg); }
+  100% { transform: translate3d(110vw, 90vh, 0) rotate(35deg); }
+}
+
+/* Solo 5 mariposas para mantenerlo ligero y cozy */
+.bf-1 { width: 50px; height: 50px; color: #B794F4; animation: flutter-right 40s linear infinite; }
+.bf-1 .butterfly { animation-duration: 1.3s; }
+
+.bf-2 { width: 40px; height: 40px; color: #FF77A9; animation: flutter-left 48s linear infinite; animation-delay: -10s; }
+.bf-2 .butterfly { animation-duration: 1.6s; }
+
+.bf-3 { width: 60px; height: 60px; color: #E9D8FD; animation: flutter-up 45s linear infinite; animation-delay: -25s; opacity: 0.85; }
+.bf-3 .butterfly { animation-duration: 1.9s; }
+
+.bf-4 { width: 35px; height: 35px; color: #D49ABF; animation: flutter-diagonal 38s linear infinite; animation-delay: -18s; }
+.bf-4 .butterfly { animation-duration: 1.2s; }
+
+.bf-5 { width: 45px; height: 45px; color: #A78ACB; animation: flutter-left 55s linear infinite; animation-delay: -35s; }
+.bf-5 .butterfly { animation-duration: 1.5s; }
+
+@media(prefers-reduced-motion:reduce) { .butterfly-wrap, .butterfly, .dust { animation: none !important; } }
 </style>
 </head>
 
@@ -177,7 +230,7 @@ body {
 <!-- 1. TEXTURA DE PAPEL -->
 <div class="paper-texture" aria-hidden="true"></div>
 
-<!-- 2. BOKEH (LUCES DESENFOCADAS OPTIMIZADAS) -->
+<!-- 2. BOKEH (LUCES DESENFOCADAS) -->
 <div class="bokeh-container" aria-hidden="true">
   <div class="bokeh-circle bokeh-1"></div>
   <div class="bokeh-circle bokeh-2"></div>
@@ -187,7 +240,7 @@ body {
 <!-- 3. VIÑETEADO SUAVE -->
 <div class="vignette-overlay" aria-hidden="true"></div>
 
-<!-- 4. POLVO DE HADAS MULTIDIRECCIONAL (ESTRELLITAS) -->
+<!-- 4. POLVO DE HADAS -->
 <div class="fairy-dust-container" aria-hidden="true">
   <div class="dust d-1"></div>
   <div class="dust d-2"></div>
@@ -199,6 +252,15 @@ body {
   <div class="dust d-8"></div>
   <div class="dust d-9"></div>
   <div class="dust d-10"></div>
+</div>
+
+<!-- 5. MARIPOSAS COZY OPTIMIZADAS -->
+<div class="butterfly-container" aria-hidden="true">
+  <div class="butterfly-wrap bf-1"><div class="butterfly"><svg viewBox="0 0 100 100"><path d="M50,45 C20,15 5,35 40,55 C15,70 25,95 50,75 C75,95 85,70 60,55 C95,35 80,15 50,45 Z" fill="currentColor" opacity="0.4"/><path d="M48,35 C48,25 52,25 52,35 L52,75 C52,85 48,85 48,75 Z" fill="currentColor"/><path d="M50,35 Q40,15 30,20 M50,35 Q60,15 70,20" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round"/></svg></div></div>
+  <div class="butterfly-wrap bf-2"><div class="butterfly"><svg viewBox="0 0 100 100"><path d="M50,45 C20,15 5,35 40,55 C15,70 25,95 50,75 C75,95 85,70 60,55 C95,35 80,15 50,45 Z" fill="currentColor" opacity="0.4"/><path d="M48,35 C48,25 52,25 52,35 L52,75 C52,85 48,85 48,75 Z" fill="currentColor"/><path d="M50,35 Q40,15 30,20 M50,35 Q60,15 70,20" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round"/></svg></div></div>
+  <div class="butterfly-wrap bf-3"><div class="butterfly"><svg viewBox="0 0 100 100"><path d="M50,45 C20,15 5,35 40,55 C15,70 25,95 50,75 C75,95 85,70 60,55 C95,35 80,15 50,45 Z" fill="currentColor" opacity="0.4"/><path d="M48,35 C48,25 52,25 52,35 L52,75 C52,85 48,85 48,75 Z" fill="currentColor"/><path d="M50,35 Q40,15 30,20 M50,35 Q60,15 70,20" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round"/></svg></div></div>
+  <div class="butterfly-wrap bf-4"><div class="butterfly"><svg viewBox="0 0 100 100"><path d="M50,45 C20,15 5,35 40,55 C15,70 25,95 50,75 C75,95 85,70 60,55 C95,35 80,15 50,45 Z" fill="currentColor" opacity="0.4"/><path d="M48,35 C48,25 52,25 52,35 L52,75 C52,85 48,85 48,75 Z" fill="currentColor"/><path d="M50,35 Q40,15 30,20 M50,35 Q60,15 70,20" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round"/></svg></div></div>
+  <div class="butterfly-wrap bf-5"><div class="butterfly"><svg viewBox="0 0 100 100"><path d="M50,45 C20,15 5,35 40,55 C15,70 25,95 50,75 C75,95 85,70 60,55 C95,35 80,15 50,45 Z" fill="currentColor" opacity="0.4"/><path d="M48,35 C48,25 52,25 52,35 L52,75 C52,85 48,85 48,75 Z" fill="currentColor"/><path d="M50,35 Q40,15 30,20 M50,35 Q60,15 70,20" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round"/></svg></div></div>
 </div>
 
 <!-- NAVEGACIÓN -->
