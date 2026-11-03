@@ -85,32 +85,93 @@ body {
 .modal-scroll::-webkit-scrollbar-track { background: transparent; }
 .modal-scroll::-webkit-scrollbar-thumb { background: #B794F4; border-radius: 10px; }
 
-/* Fondo Animado */
+
+/* =========================================================================
+   NUEVOS EFECTOS COZY DE FONDO 
+   ========================================================================= */
+
+/* 1. TEXTURA DE PAPEL */
+.paper-texture {
+  position: fixed; inset: 0; pointer-events: none; z-index: -2;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.05; mix-blend-mode: multiply;
+}
+
+/* 2. VIÑETEADO SUAVE */
+.vignette-overlay {
+  position: fixed; inset: 0; pointer-events: none; z-index: 10;
+  background: radial-gradient(circle at center, transparent 40%, rgba(107, 70, 193, 0.12) 150%);
+}
+
+/* 3. BOKEH (LUCES DESENFOCADAS) */
+.bokeh-container {
+  position: fixed; inset: 0; pointer-events: none; z-index: -1; overflow: hidden;
+}
+.bokeh-circle {
+  position: absolute; border-radius: 50%; filter: blur(90px); opacity: 0.35;
+  animation: bokeh-drift 25s infinite alternate ease-in-out;
+}
+.bokeh-1 { width: 40vw; height: 40vw; background: #FF77A9; top: -10%; left: -10%; animation-delay: 0s; }
+.bokeh-2 { width: 50vw; height: 50vw; background: #B794F4; bottom: -20%; right: -10%; animation-delay: -5s; animation-duration: 30s; }
+.bokeh-3 { width: 35vw; height: 35vw; background: #E9D8FD; top: 30%; left: 30%; animation-delay: -10s; animation-duration: 35s; }
+
+@keyframes bokeh-drift {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(8vw, 8vh) scale(1.15); }
+}
+
+/* 4. POLVO DE HADAS */
+.fairy-dust-container {
+  position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
+}
+.dust {
+  position: absolute; background: white; border-radius: 50%;
+  box-shadow: 0 0 6px 2px rgba(255, 255, 255, 0.7), 0 0 12px 4px rgba(255, 119, 169, 0.3);
+  animation: float-up linear infinite; opacity: 0;
+}
+.dust-1 { left: 15%; width: 4px; height: 4px; animation-duration: 25s; animation-delay: 0s; }
+.dust-2 { left: 35%; width: 3px; height: 3px; animation-duration: 22s; animation-delay: 4s; }
+.dust-3 { left: 65%; width: 5px; height: 5px; animation-duration: 28s; animation-delay: 2s; }
+.dust-4 { left: 85%; width: 4px; height: 4px; animation-duration: 24s; animation-delay: 8s; }
+.dust-5 { left: 50%; width: 3px; height: 3px; animation-duration: 20s; animation-delay: 12s; }
+.dust-6 { left: 25%; width: 4px; height: 4px; animation-duration: 27s; animation-delay: 15s; }
+.dust-7 { left: 75%; width: 3px; height: 3px; animation-duration: 23s; animation-delay: 7s; }
+
+@keyframes float-up {
+  0% { transform: translate3d(0, 110vh, 0) scale(0.5); opacity: 0; }
+  20% { opacity: 0.7; transform: translate3d(20px, 80vh, 0) scale(1); }
+  80% { opacity: 0.7; transform: translate3d(-20px, 20vh, 0) scale(1); }
+  100% { transform: translate3d(0, -10vh, 0) scale(0.5); opacity: 0; }
+}
+
+/* =========================================================================
+   MARIPOSAS (CRAFTS) - Movimiento orgánico suavizado y ralentizado
+   ========================================================================= */
 .craft-background { position: fixed; inset: 0; width: 100%; height: 100vh; overflow: hidden; pointer-events: none; z-index: 0; }
-.craft { position: absolute; width: 45px; height: 45px; opacity: .24; pointer-events: none; will-change: transform; animation: craft-drift 14s ease-in-out infinite; }
+.craft { position: absolute; width: 45px; height: 45px; opacity: .24; pointer-events: none; will-change: transform; animation: craft-drift ease-in-out infinite alternate; }
 .craft svg { width: 100%; height: 100%; overflow: visible; }
 
-.craft-1 { left: 5%; top: 12%; animation-duration: 17s; }
-.craft-2 { left: 78%; top: 18%; animation-duration: 21s; }
-.craft-3 { left: 18%; top: 35%; animation-duration: 15s; }
-.craft-4 { left: 88%; top: 42%; animation-duration: 19s; }
-.craft-5 { left: 70%; top: 65%; animation-duration: 16s; }
-.craft-6 { left: 7%; top: 76%; animation-duration: 22s; }
-.craft-7 { left: 43%; top: 20%; animation-duration: 18s; }
-.craft-8 { left: 28%; top: 87%; animation-duration: 20s; }
-.craft-9 { left: 57%; top: 48%; animation-duration: 16s; }
-.craft-10 { left: 93%; top: 82%; animation-duration: 23s; }
-.craft-11 { left: 35%; top: 9%; animation-duration: 19s; }
-.craft-12 { left: 62%; top: 90%; animation-duration: 17s; }
-.craft-13 { left: 22%; top: 60%; animation-duration: 21s; }
-.craft-14 { left: 82%; top: 56%; animation-duration: 15s; }
+/* Tiempos duplicados para vuelo tranquilo */
+.craft-1 { left: 5%; top: 12%; animation-duration: 35s; }
+.craft-2 { left: 78%; top: 18%; animation-duration: 42s; animation-delay: -5s; }
+.craft-3 { left: 18%; top: 35%; animation-duration: 30s; animation-delay: -2s; }
+.craft-4 { left: 88%; top: 42%; animation-duration: 38s; animation-delay: -8s; }
+.craft-5 { left: 70%; top: 65%; animation-duration: 32s; animation-delay: -12s; }
+.craft-6 { left: 7%; top: 76%; animation-duration: 45s; animation-delay: -15s; }
+.craft-7 { left: 43%; top: 20%; animation-duration: 36s; animation-delay: -3s; }
+.craft-8 { left: 28%; top: 87%; animation-duration: 40s; animation-delay: -7s; }
+.craft-9 { left: 57%; top: 48%; animation-duration: 32s; animation-delay: -11s; }
+.craft-10 { left: 93%; top: 82%; animation-duration: 46s; animation-delay: -14s; }
+.craft-11 { left: 35%; top: 9%; animation-duration: 38s; animation-delay: -6s; }
+.craft-12 { left: 62%; top: 90%; animation-duration: 34s; animation-delay: -9s; }
+.craft-13 { left: 22%; top: 60%; animation-duration: 42s; animation-delay: -4s; }
+.craft-14 { left: 82%; top: 56%; animation-duration: 30s; animation-delay: -10s; }
 
 @keyframes craft-drift {
-  0% { transform: translate3d(0,0,0) rotate(-8deg); }
-  25% { transform: translate3d(18px,-25px,0) rotate(8deg); }
-  50% { transform: translate3d(-12px,-48px,0) rotate(15deg); }
-  75% { transform: translate3d(-25px,-20px,0) rotate(-5deg); }
-  100% { transform: translate3d(0,0,0) rotate(-8deg); }
+  0% { transform: translate3d(0,0,0) rotate(-4deg); }
+  33% { transform: translate3d(25px,-35px,0) rotate(4deg); }
+  66% { transform: translate3d(-15px,-60px,0) rotate(8deg); }
+  100% { transform: translate3d(-35px,-25px,0) rotate(-2deg); }
 }
 @media(prefers-reduced-motion:reduce) { .craft { animation: none; } }
 @media(max-width:560px) { .craft { width: 32px; height: 32px; opacity: .19; } }
@@ -119,6 +180,31 @@ body {
 
 <body class="font-sans text-gray-700 antialiased relative min-h-screen overflow-x-hidden">
 
+<!-- 1. TEXTURA DE PAPEL -->
+<div class="paper-texture" aria-hidden="true"></div>
+
+<!-- 2. BOKEH (LUCES DESENFOCADAS) -->
+<div class="bokeh-container" aria-hidden="true">
+  <div class="bokeh-circle bokeh-1"></div>
+  <div class="bokeh-circle bokeh-2"></div>
+  <div class="bokeh-circle bokeh-3"></div>
+</div>
+
+<!-- 3. VIÑETEADO SUAVE -->
+<div class="vignette-overlay" aria-hidden="true"></div>
+
+<!-- 4. POLVO DE HADAS -->
+<div class="fairy-dust-container" aria-hidden="true">
+  <div class="dust dust-1"></div>
+  <div class="dust dust-2"></div>
+  <div class="dust dust-3"></div>
+  <div class="dust dust-4"></div>
+  <div class="dust dust-5"></div>
+  <div class="dust dust-6"></div>
+  <div class="dust dust-7"></div>
+</div>
+
+<!-- MARIPOSAS / HERRAMIENTAS -->
 <div class="craft-background" aria-hidden="true">
   <div class="craft craft-1"><svg viewBox="0 0 64 64" fill="none"><path d="M32 7C17 7 6 18 6 31c0 13 10 23 23 23h6c5 0 8-5 5-9-2-3-1-7 3-7h4c7 0 11-5 10-12C55 15 44 7 32 7Z" fill="#DCC8F4" stroke="#9274B8" stroke-width="2.2"/><circle cx="20" cy="23" r="4" fill="#D98DB8"/><circle cx="31" cy="17" r="4" fill="#EBC68D"/><circle cx="42" cy="23" r="4" fill="#A9C9D6"/><circle cx="19" cy="36" r="4" fill="#B4C9A7"/></svg></div>
   <div class="craft craft-2"><svg viewBox="0 0 80 80" fill="none"><path d="M18 39C13 25 25 13 39 15C53 11 66 24 65 38C69 51 56 65 42 64C27 68 15 54 18 39Z" fill="#E8C5DF" stroke="#B77EAA" stroke-width="2"/><path d="M23 23C39 27 47 43 49 59M37 16C24 29 28 47 43 64M55 20C42 32 39 46 55 55M18 39C31 32 49 30 64 40M23 53C35 42 48 39 62 46" stroke="#B77EAA" stroke-width="2.5" stroke-linecap="round"/><path d="M59 57Q73 61 69 72Q66 78 61 72" stroke="#B77EAA" stroke-width="2.5" stroke-linecap="round"/><path d="M10 12L38 43M8 10L14 10M36 41L40 40M19 7L47 34M17 5L21 6M45 32L49 31" stroke="#9274B8" stroke-width="2" stroke-linecap="round"/></svg></div>
@@ -303,6 +389,12 @@ body {
             <label class="block text-sm font-medium text-lila-oscuro mb-1">Tu Dirección de Envío *</label>
             <input type="text" id="cust-address" required placeholder="Calle, Número, Piso, Código Postal, Ciudad..." class="w-full border border-purple-200 rounded-xl px-4 py-3 text-sm bg-white/90 focus:outline-none focus:ring-2 focus:ring-lila-medio">
             <p class="text-xs text-rosa-fuerte mt-1.5 font-semibold"><i class="fa-solid fa-triangle-exclamation"></i> ¡Importante! Solo realizamos envíos dentro de la Península.</p>
+          </div>
+
+          <!-- CAMPO DE COMENTARIOS DEL PEDIDO -->
+          <div>
+            <label class="block text-sm font-medium text-lila-oscuro mb-1">Comentarios del Pedido (Opcional)</label>
+            <textarea id="cust-comment" rows="3" placeholder="Si tienes algún comentario general sobre el pedido, envíamelo por aquí..." class="w-full border border-purple-200 rounded-xl px-4 py-3 text-sm bg-white/90 focus:outline-none focus:ring-2 focus:ring-lila-medio"></textarea>
           </div>
 
           <div>
@@ -1068,6 +1160,7 @@ async function sendOrderEmail(e) {
   const email = document.getElementById('cust-email').value;
   const phone = phoneInput.value.replace(/[^0-9]/g, '');
   const address = document.getElementById('cust-address').value;
+  const comment = document.getElementById('cust-comment').value;
 
   if (!phone) {
     phoneInput.focus();
@@ -1087,7 +1180,8 @@ async function sendOrderEmail(e) {
       Telefono: phone,
       Direccion: address,
       Total: `${totalPrice} €`,
-      Productos: summaryLines
+      Productos: summaryLines,
+      Comentario: comment
     };
 
     // Usamos mode: no-cors y texto plano para forzar el envío ignorando bloqueos del navegador
@@ -1109,7 +1203,8 @@ async function sendOrderEmail(e) {
           Telefono: phone,
           Direccion: address,
           Total: `${totalPrice} €`,
-          Productos: summaryLines
+          Productos: summaryLines,
+          Comentarios: comment
         })
       });
     } catch(errFormSubmit) {}
@@ -1118,7 +1213,7 @@ async function sendOrderEmail(e) {
     clearCart();
     document.getElementById('order-form').reset();
   } catch (err) {
-    const mailtoBody = encodeURIComponent(`¡Hola Silvia!\n\n${summaryLines}\n\nTotal: ${totalPrice} €\n\nDirección: ${address}\n\n- Nombre: ${name}\n- Email: ${email}\n- Teléfono: ${phone}`);
+    const mailtoBody = encodeURIComponent(`¡Hola Silvia!\n\n${summaryLines}\n\nTotal: ${totalPrice} €\n\nDirección: ${address}\n\n- Nombre: ${name}\n- Email: ${email}\n- Teléfono: ${phone}\n- Comentarios: ${comment}`);
     window.location.href = `mailto:${MI_CORREO}?subject=Nuevo Pedido Web - ${name}&body=${mailtoBody}`;
   } finally {
     setTimeout(() => {
